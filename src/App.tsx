@@ -38,7 +38,6 @@ function App() {
         debugger
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
-
         /*let resultTask = tasks.filter((t) => {
             return t.id !== id
         })*/
