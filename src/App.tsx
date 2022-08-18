@@ -1,23 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {ArrayType, Todolist} from "./Todolist";
 
 function App() {
-    let tasks1: Array<ArrayType> = [
+    let tasks: Array<ArrayType> = [
         {id: 1, title: "HTML&CSS", isDone: true},
         {id: 2, title: "JS", isDone: true},
         {id: 3, title: "ReactJS", isDone: false},
         {id: 4, title: "Redux", isDone: false}
     ]
-    let tasks2: Array<ArrayType> = [
-        {id: 1, title: "Hello word", isDone: true},
-        /*{id: 2, title: "I am Happy", isDone: false},
-        {id: 3, title: "Yo ", isDone: false}*/
-    ]
+
+
+
+    const removeTask = (id: number) => {
+
+        tasks = tasks.filter(t => t.id !== id)
+        debugger
+          /*let resultTask = tasks.filter((t) => {
+              return t.id !== id
+          })*/
+
+        /*  let resultTask = tasks.filter((t) => {
+              if (t.id !== id) {
+                  return true
+              }
+              else {
+                  return false
+              }
+          })*/
+
+    }
+
     return (
         <div className="App">
-            <Todolist title="What to learn" tasks = {tasks1}/>
-            <Todolist title="Songs" tasks = {tasks2}/>
+            <Todolist
+                title="What to learn"
+                tasks={tasks}
+                removeTask={removeTask}
+            />
+
         </div>
     );
 }
