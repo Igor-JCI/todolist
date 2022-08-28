@@ -38,15 +38,14 @@ function App() {
         {id: v1(), title: "Redux", isDone: false}
     ])
 
-    const addTask = (text: string) => {
-
+    const addTask = (title: string) => {
         let newTask = {
             id: v1(),
-            title: text,
+            title: title,
             isDone: false
         }
 
-        let newTasks = [newTask,...tasks]
+        let newTasks = [newTask, ...tasks]
         setTasks(newTasks)
     }
     let [filter, setFilter] = useState<FilterValuesType>("all")

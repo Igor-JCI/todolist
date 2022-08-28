@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {FilterValuesType} from "./App";
 
 export type ArrayType = {
@@ -17,25 +17,40 @@ type PropsType = {
 }
 
 export const Todolist = (props: PropsType) => {
-    let elementToAddTasks = React.createRef <HTMLInputElement>()
+    /* let elementToAddTasks = React.createRef <HTMLInputElement>()
+     const addTasks = () => {
 
+         let text = elementToAddTasks.current?.value
+         if (title) {
+             props.addTask(title)
+         }
 
-    const addTasks = () => {
+     }*/
 
-        let text = elementToAddTasks.current?.value
-        if (text) {
-            props.addTask(text)
-        }
-
-    }
+    const [newTaskTitle, setNewTaskTitle] = useState("")
 
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
 
-                <input ref={elementToAddTasks}/>
-                <button onClick={addTasks}>+</button>
+                <input value={newTaskTitle}
+                       onChange={(e) => {
+                    setNewTaskTitle(e.currentTarget.value)
+                }}
+                onKeyPress={(e)=>{
+                    if (e.charCode === 13) {
+                        props.addTask(newTaskTitle)
+                        setNewTaskTitle("")
+                    }
+                }}
+                />
+
+                <button onClick={() => {
+                    props.addTask(newTaskTitle)
+                    setNewTaskTitle("")
+                }}>+
+                </button>
 
             </div>
             <ul>
