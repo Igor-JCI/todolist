@@ -30,13 +30,24 @@ function App() {
     ]
     let [tasks, setTasks] = useState(initTasks)*/
 
-
     let [tasks, setTasks] = useState([
         {id: v1(), title: "HTML&CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
         {id: v1(), title: "ReactJS", isDone: false},
         {id: v1(), title: "Redux", isDone: false}
     ])
+
+    let [filter, setFilter] = useState<FilterValuesType>("all")
+
+    const changeStatus = (taskId: string, isDone: boolean) => {
+        let task = tasks.find(t => t.id == taskId)
+        if (task) {
+            task.isDone = isDone
+        }
+
+        setTasks([...tasks])
+
+    }
 
     const addTask = (title: string) => {
         let newTask = {
@@ -48,7 +59,7 @@ function App() {
         let newTasks = [newTask, ...tasks]
         setTasks(newTasks)
     }
-    let [filter, setFilter] = useState<FilterValuesType>("all")
+
 
     const changeFilter = (value: FilterValuesType) => {
         setFilter(value)
@@ -58,19 +69,6 @@ function App() {
         debugger
         let filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
-        /*let resultTask = tasks.filter((t) => {
-            return t.id !== id
-        })*/
-
-        /*  let resultTask = tasks.filter((t) => {
-              if (t.id !== id) {
-                  return true
-              }
-              else {
-                  return false
-              }
-          })*/
-
     }
 
     let tasksForTodolist = tasks
@@ -93,6 +91,8 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus = {changeStatus}
+                filter = {filter}
             />
 
         </div>
