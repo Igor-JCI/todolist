@@ -1,5 +1,6 @@
 import {TaskStateType} from "../App";
 import {v1} from "uuid";
+import {AddTodolistActionType, RemoveTodolistActionType} from "./todolists-reducer";
 
 export type RemoveTaskActionType = {
     type: "REMOVE-TASK", taskId: string, toDoListId: string
@@ -14,7 +15,13 @@ export type ChangeTaskTitleType = {
     type: "CHANGE-TASK-TITLE", taskId: string, title: string, toDoListId: string
 }
 
-type ActionsType = RemoveTaskActionType | AddTasksActionType | ChangeTaskStatusType | ChangeTaskTitleType
+type ActionsType =
+    AddTodolistActionType
+    | RemoveTaskActionType
+    | AddTasksActionType
+    | ChangeTaskStatusType
+    | ChangeTaskTitleType
+    | RemoveTodolistActionType
 
 export const tasksReducer = (state: TaskStateType, action: ActionsType): TaskStateType => {
     switch (action.type) {
@@ -33,7 +40,7 @@ export const tasksReducer = (state: TaskStateType, action: ActionsType): TaskSta
             stateCopy[action.toDoListId] = filteredTasks
             return stateCopy
         }
-        case "CHANGE-TASK-STATUS":{
+        case "CHANGE-TASK-STATUS": {
             const stateCopy = {...state}
             let tasks = stateCopy[action.toDoListId]
             let task = tasks.find(t => t.id == action.taskId)
@@ -42,13 +49,23 @@ export const tasksReducer = (state: TaskStateType, action: ActionsType): TaskSta
             }
             return stateCopy
         }
-        case "CHANGE-TASK-TITLE":{
+        case "CHANGE-TASK-TITLE": {
             const stateCopy = {...state}
             let tasks = stateCopy[action.toDoListId]
             let task = tasks.find(t => t.id == action.taskId)
             if (task) {
                 task.title = action.title
             }
+            return stateCopy
+        }
+        case "ADD-TODOLIST": {
+            const stateCopy = {...state}
+            stateCopy[action.toDoListId] = []
+            return stateCopy
+        }
+        case "REMOVE-TODOLIST":{
+            const stateCopy = {...state}
+            delete stateCopy[action.id]
             return stateCopy
         }
         default:
