@@ -5,7 +5,7 @@ export type RemoveTodolistActionType = {
     type: "REMOVE-TODOLIST", id: string
 }
 export type AddTodolistActionType = {
-    type: "ADD-TODOLIST", title: string, toDoListId:string
+    type: "ADD-TODOLIST", title: string, toDoListId: string
 }
 export type ChangeTodolistTitleActionType = {
     type: "CHANGE-TODOLIST-TITLE",
@@ -29,7 +29,8 @@ export const toDoListsReducer = (state: Array<ToDoListType>, action: ActionsType
             return filteredToDoList
         }
         case "ADD-TODOLIST": {
-            return [...state, {id: action.toDoListId, title: action.title, filter: "all"}]
+            debugger
+            return [{id: action.toDoListId, title: action.title, filter: "all"}, ...state]
         }
         case "CHANGE-TODOLIST-TITLE": {
             let td = state.find(tl => tl.id === action.id)
@@ -50,20 +51,20 @@ export const toDoListsReducer = (state: Array<ToDoListType>, action: ActionsType
     }
 }
 
-export const removeTodolistAC = (toDoListId:string):RemoveTodolistActionType => ({
+export const removeTodolistAC = (toDoListId: string): RemoveTodolistActionType => ({
     type: "REMOVE-TODOLIST", id: toDoListId
 })
-export const addTodolistAC = (title:string):AddTodolistActionType => ({
-    type: "ADD-TODOLIST", title: title, toDoListId:v1()
+export const addTodolistAC = (title: string, toDoListId:string): AddTodolistActionType => ({
+    type: "ADD-TODOLIST", title: title, toDoListId
 })
-export const changeTodolistTitleAC = (id:string, title:string):ChangeTodolistTitleActionType => ({
+export const changeTodolistTitleAC = (id: string, title: string): ChangeTodolistTitleActionType => ({
     type: "CHANGE-TODOLIST-TITLE" as const,
     id: id,
     title: title
 })
-export const changeTodolistFilterAC = (id:string, filter:FilterValuesType):ChangeTodolistFilterActionType => ({
+export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): ChangeTodolistFilterActionType => ({
     type: "CHANGE-TODOLIST-FILTER",
     id: id,
-    filter:filter
+    filter: filter
 })
 
