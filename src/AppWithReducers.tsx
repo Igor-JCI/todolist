@@ -46,12 +46,6 @@ function AppWithReducers() {
 
     const changeStatus = (taskId: string, isDone: boolean, toDoListId: string) => {
         dispatchToTaskReducer(changeTaskStatusAC(taskId, isDone, toDoListId))
-        /*let tasks = tasksObj[toDoListId]
-        let task = tasks.find(t => t.id == taskId)
-        if (task) {
-            task.isDone = isDone
-            setTasks({...tasksObj})
-        }*/
     }
     const changeTaskTitle = (taskId: string, newTitle: string, toDoListId: string) => {
         dispatchToTaskReducer(changeTaskTitleAC(taskId, newTitle, toDoListId))
