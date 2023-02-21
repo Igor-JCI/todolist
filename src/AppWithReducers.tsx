@@ -49,16 +49,6 @@ function AppWithReducers() {
     }
     const changeTaskTitle = (taskId: string, newTitle: string, toDoListId: string) => {
         dispatchToTaskReducer(changeTaskTitleAC(taskId, newTitle, toDoListId))
-        /*//Достаем нужный массив по айди тудулиста
-        let tasks = tasksObj[toDoListId]
-        // Достаем нужную таску по айди
-        let task = tasks.find(t => t.id == taskId)
-        // Достем название таски и меняем его
-        if (task) {
-            task.title = newTitle
-            // засетаем в стейт копию объекта, чтобы Реакт отреагировал перерисовкой
-            setTasks({...tasksObj})
-        }*/
     }
     const addTask = (title: string, toDoListId: string) => {
         const action = addTaskAC(title, toDoListId)
