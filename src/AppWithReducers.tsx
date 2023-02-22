@@ -53,11 +53,6 @@ function AppWithReducers() {
     const addTask = (title: string, toDoListId: string) => {
         const action = addTaskAC(title, toDoListId)
         dispatchToTaskReducer(action)
-        /* let task = {id: v1(), title: title, isDone: false}
-         let tasks = tasksObj[toDoListId]
-         let newTasks = [task, ...tasks]
-         tasksObj[toDoListId] = newTasks
-         setTasks({...tasksObj})*/
     }
     const removeTask = (id: string, toDoListId: string) => {
         const action = removeTasksAC(id, toDoListId)
