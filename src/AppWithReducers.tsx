@@ -78,11 +78,6 @@ function AppWithReducers() {
     }
     const changeTodolistTitle = (toDoListId: string, newTitle: string) => {
         dispatchToToDolListsReducer(changeTodolistTitleAC(toDoListId, newTitle))
-        /*let td = toDoLists.find(tl => tl.id === toDoListId)
-        if (td) {
-            td.title = newTitle
-            setToDoLists([...toDoLists])
-        }*/
     }
 
     return (
