@@ -66,10 +66,6 @@ function AppWithReducers() {
         const action = removeTodolistAC(toDoListId)
         dispatchToToDolListsReducer(action)
         dispatchToTaskReducer(action)
-        /*let filteredToDoList = toDoLists.filter(t => t.id !== toDoListId)
-        setToDoLists(filteredToDoList)
-        delete tasksObj[toDoListId]
-        setTasks({...tasksObj})*/
     }
     const addTodolist = (title: string) => {
         let toDoListId = v1()
