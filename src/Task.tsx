@@ -29,4 +29,5 @@ export const Task = React.memo((props: TaskPropsType) => {
             <IconButton onClick={onRemoveHandler}><Delete></Delete></IconButton>
         </div>
     )
+
 })
