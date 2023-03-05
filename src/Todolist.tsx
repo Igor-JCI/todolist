@@ -54,7 +54,6 @@ export const Todolist = React.memo((props: PropsType) => {
     if (props.filter === "completed") {
         tasksForTodolist = props.tasks.filter(t => t.isDone === true)
     }
-
     return (
         <div>
             <h3>
