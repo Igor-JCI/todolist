@@ -24,6 +24,7 @@ type PropsType = {
     changeTaskTitle: (id: string, newTitle: string, toDoListId: string) => void,
     changeTodolistTitle: (toDoListId: string, newTitle: string) => void
 }
+
 export const Todolist = React.memo((props: PropsType) => {
     console.log("Todolist is called")
     const onAllClickHandler = useCallback(() => {
