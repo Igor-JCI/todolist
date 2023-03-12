@@ -43,7 +43,6 @@ function AppWithReducers() {
             {id: v1(), title: "Milk", isDone: true},
         ]
     })
-
     const changeStatus = (taskId: string, isDone: boolean, toDoListId: string) => {
         dispatchToTaskReducer(changeTaskStatusAC(taskId, isDone, toDoListId))
     }
