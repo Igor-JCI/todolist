@@ -60,7 +60,6 @@ function AppWithRedux() {
     const changeTodolistTitle = useCallback((toDoListId: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(toDoListId, newTitle))
     }, [dispatch])
-
     return (
         <div className="App">
             <AppBar position="static">
