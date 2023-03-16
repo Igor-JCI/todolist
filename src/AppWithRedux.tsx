@@ -82,7 +82,6 @@ function AppWithRedux() {
                         toDoLists.map(tl => {
                             let allTodolistTasks = tasksObj[tl.id]
                             let tasksForTodolist = allTodolistTasks
-
                             return <Grid item>
                                 <Paper style={{padding: "10px"}}>
                                     <Todolist
