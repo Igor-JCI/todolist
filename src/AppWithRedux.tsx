@@ -45,7 +45,6 @@ function AppWithRedux() {
         const action = removeTasksAC(id, toDoListId)
         dispatch(action)
     }, [dispatch])
-
     const changeFilter = useCallback((toDoListId: string, value: FilterValuesType) => {
         dispatch(changeTodolistFilterAC(toDoListId, value))
     }, [dispatch])
