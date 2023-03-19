@@ -24,7 +24,6 @@ export type ToDoListType = {
 export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
-
 function AppWithRedux() {
     console.log("App is called")
     const dispatch = useDispatch()
