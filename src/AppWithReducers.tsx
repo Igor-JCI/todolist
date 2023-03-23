@@ -23,7 +23,6 @@ export type ToDoListType = {
 export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
-
 function AppWithReducers() {
     let toDoListId1 = v1()
     let toDoListId2 = v1()
