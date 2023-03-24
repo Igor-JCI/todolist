@@ -45,6 +45,5 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                onKeyPress={onKeyPressHandler}
                className={error ? "error" : ""}
         />*/}
-        {/*<button onClick={addTask}>+</button>*/}
     </div>
 })
