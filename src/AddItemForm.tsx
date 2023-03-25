@@ -40,10 +40,5 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
         />
         <IconButton size={"large"} onClick={addTask} color={"primary"}> <ControlPoint/></IconButton>
         {/*{error && <div className="error-message">{error}</div>}*/}
-        {/*<input value={title}
-               onChange={onChangeHandler}
-               onKeyPress={onKeyPressHandler}
-               className={error ? "error" : ""}
-        />*/}
     </div>
 })
