@@ -39,6 +39,5 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                    helperText={error}
         />
         <IconButton size={"large"} onClick={addTask} color={"primary"}> <ControlPoint/></IconButton>
-        {/*{error && <div className="error-message">{error}</div>}*/}
     </div>
 })
