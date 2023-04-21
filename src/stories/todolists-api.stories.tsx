@@ -40,24 +40,49 @@ export const CreateTodolist = () => {
 }
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
-        const toDoListID = "6a6fa290-3bb1-4f79-9e42-48b85e497504"
-        toDoListsAPI.deleteTodolist(toDoListID).then((res) => {
+    const [toDoListId, setToDoListId] = useState<string>("")
+    const deleteTDL = () => {
+        const tDLID = toDoListId
+        toDoListsAPI.deleteTodolist(tDLID).then((res) => {
             setState(res.data)
         })
-    }, [])
-    return <div>{JSON.stringify(state)}</div>
+    }
+    /*const changeTDLID = (e: ChangeEvent<HTMLInputElement>) => {
+        setToDoListId(e.currentTarget.value)
+    }*/
+    const changeTDLID = (e: ChangeEvent<HTMLInputElement>) => setToDoListId(e.currentTarget.value)
+
+    return <div>{JSON.stringify(state)}
+        <div>
+            <input placeholder={"toDoListId"} value={toDoListId} onChange={changeTDLID}/>
+            <button onClick={deleteTDL}>DeleteTodolist</button>
+        </div>
+    </div>
 }
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
-        const toDoListID = "6405bb3e-0a77-4311-9ee8-107d1d210b02"
-        toDoListsAPI.UpdateTodolistTitle(toDoListID, "google")
+    const [toDoListID, setToDoListID] = useState<string>("")
+    const [title, setTitle] = useState<string>("")
+
+    const updateTDL = () => {
+        const tDLID = toDoListID
+        const ttl = title
+        toDoListsAPI.UpdateTodolistTitle(tDLID, ttl)
             .then((res) => {
                 setState(res.data)
             })
-    }, [])
-    return <div>{JSON.stringify(state)}</div>
+    }
+
+    const changeTDLTitle = (e:ChangeEvent<HTMLInputElement>) => setToDoListID(e.currentTarget.value)
+    const changeTDLID = (e:ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+
+    return <div>{JSON.stringify(state)}
+        <div>
+            <input placeholder={"toDoListID"} value={toDoListID} onChange={changeTDLTitle}/>
+            <input placeholder={"title"} value={title} onChange={changeTDLID}/>
+            <button onClick={updateTDL}>Update</button>
+        </div>
+    </div>
 }
 
 export const GetTasks = () => {
