@@ -75,22 +75,8 @@ export const toDoListsAPI = {
         const promise = instance.delete<ResponseType>(`todo-lists/${toDoListID}/tasks/${taskId}`)
         return promise
     },
-    UpdateTaskTitle(toDoListID: string, taskId: string, title: string,
-                    description: string,
-                    completed: boolean,
-                    status: number,
-                    priority: number,
-                    startDate: null,
-                    deadline: null) {
-        const promise = axios.put<ResponseType<{ item: taskDataType }>>(`todo-lists/${toDoListID}/tasks/${taskId}`, {
-            title,
-            description,
-            completed,
-            status,
-            priority,
-            startDate,
-            deadline
-        })
+    UpdateTaskTitle(toDoListID: string, taskId: string, model: taskDataType) {
+        const promise = axios.put<ResponseType<{ item: taskDataType }>>(`todo-lists/${toDoListID}/tasks/${taskId}`, model)
         return promise
     }
 }

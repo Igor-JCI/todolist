@@ -73,8 +73,8 @@ export const UpdateTodolistTitle = () => {
             })
     }
 
-    const changeTDLTitle = (e:ChangeEvent<HTMLInputElement>) => setToDoListID(e.currentTarget.value)
-    const changeTDLID = (e:ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const changeTDLTitle = (e: ChangeEvent<HTMLInputElement>) => setToDoListID(e.currentTarget.value)
+    const changeTDLID = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
 
     return <div>{JSON.stringify(state)}
         <div>
@@ -107,16 +107,16 @@ export const GetTasks = () => {
 }
 export const CreateTask = () => {
     const [state, setState] = useState<any>(null)
-    const [title, setTitle] = useState<string>("")
+    const [taskTitle, setTaskTitle] = useState<string>("")
     const [todolistId, setTodolistId] = useState<string>("")
 
     const createT = () => {
-        toDoListsAPI.createTask(todolistId, title).then((res) => {
+        toDoListsAPI.createTask(todolistId, taskTitle).then((res) => {
             setState(res.data)
         })
     }
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
+        setTaskTitle(e.currentTarget.value)
     }
     const changeTodolistId = (e: ChangeEvent<HTMLInputElement>) => {
         setTodolistId(e.currentTarget.value)
@@ -124,7 +124,7 @@ export const CreateTask = () => {
 
     return <div>{JSON.stringify(state)}
         <div>
-            <input placeholder={"title"} onChange={changeTitle}/>
+            <input placeholder={"taskTitle"} onChange={changeTitle}/>
             <input placeholder={"todolistId"} onChange={changeTodolistId}/>
             <button onClick={createT}>Create Task</button>
         </div>
@@ -168,19 +168,19 @@ export const UpdateTaskTitle = () => {
 
         const title = "Hello"
         const description = "It is me"
-        const completed = true
         const status = 0
         const priority = 1
-        const startDate = null
-        const deadline = null
+        const startDate = ""
+        const deadline = ""
 
-        toDoListsAPI.UpdateTaskTitle(toDoListID, taskId, title,
+        toDoListsAPI.UpdateTaskTitle(toDoListID, taskId, {
+            title,
             description,
-            completed,
             status,
             priority,
             startDate,
-            deadline)
+            deadline
+        })
             .then((res) => {
                 setState(res.data)
             })
