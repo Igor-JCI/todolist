@@ -1,10 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import {TaskType, Todolist} from "./Todolist";
-import {v1} from "uuid";
-import {AddItemForm} from "./AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
-import {Menu} from "@mui/icons-material";
+import {TaskType} from "./Todolist";
 /*export const Counter = () => {
     debugger
     console.log("rendering")
