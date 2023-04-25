@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, Todolist} from "./Todolist";
+import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
@@ -14,6 +14,7 @@ import {
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
+import {TaskType} from "./Todolist";
 
 export type FilterValuesType = "all" | "active" | "completed"
 export type ToDoListType = {
@@ -25,7 +26,7 @@ export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
-function AppWithRedux() {
+/*export function AppWithRedux() {
     console.log("App is called")
     const dispatch = useDispatch()
     const toDoLists = useSelector<AppRootState, Array<ToDoListType>>(state => state.toDoLists)
@@ -105,6 +106,6 @@ function AppWithRedux() {
             </Container>
         </div>
     );
-}
+}*/
 
-export default AppWithRedux;
+

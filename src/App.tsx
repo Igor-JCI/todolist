@@ -1,6 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {TaskType} from "./Todolist";
+import {v1} from "uuid";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {Menu} from "@mui/icons-material";
+import {AddItemForm} from "./AddItemForm";
+import {Todolist} from "./Todolist";
+
 /*export const Counter = () => {
     debugger
     console.log("rendering")
@@ -24,7 +30,7 @@ export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
-/*function App() {
+function App() {
     let toDoListId1 = v1()
     let toDoListId2 = v1()
     let [toDoLists, setToDoLists] = useState<Array<ToDoListType>>([
@@ -71,7 +77,7 @@ export type TaskStateType = {
         tasksObj[toDoListId] = newTasks
         setTasks({...tasksObj})
     }
-    const changeFilter = (value: FilterValuesType, toDoListId: string) => {
+    const changeFilter = (toDoListId: string, value: FilterValuesType) => {
         let todolist = toDoLists.find(tl => tl.id === toDoListId)
         if (todolist) {
             todolist.filter = value
@@ -118,7 +124,7 @@ export type TaskStateType = {
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container style={{padding:"20px"}}>
+                <Grid container style={{padding: "20px"}}>
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
                 <Grid container spacing={3}>
@@ -137,7 +143,7 @@ export type TaskStateType = {
                             }
 
                             return <Grid item>
-                                <Paper style={{padding:"10px"}} >
+                                <Paper style={{padding: "10px"}}>
                                     <Todolist
                                         key={tl.id}
                                         title={tl.title}
@@ -163,4 +169,4 @@ export type TaskStateType = {
     );
 }
 
-export default App;*/
+export default App;

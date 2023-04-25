@@ -11,13 +11,13 @@ const instance = axios.create({
     ...settings
 })
 
-type TodolistsType = {
+export type TodolistsType = {
     id: string,
     title: string,
     addedDate: string,
     order: number
 }
-type TaskType = {
+export type TaskType = {
     addedDate: string,
     deadline: string,
     description: string,
