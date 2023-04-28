@@ -4,7 +4,6 @@ import {toDoListsAPI} from "../API/todolists-api";
 export default {
     title: 'API'
 }
-
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     const getTDL = () => {
