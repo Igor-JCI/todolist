@@ -49,7 +49,6 @@ export const DeleteTodolist = () => {
         setToDoListId(e.currentTarget.value)
     }*/
     const changeTDLID = (e: ChangeEvent<HTMLInputElement>) => setToDoListId(e.currentTarget.value)
-
     return <div>{JSON.stringify(state)}
         <div>
             <input placeholder={"toDoListId"} value={toDoListId} onChange={changeTDLID}/>
