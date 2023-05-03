@@ -5,7 +5,6 @@ import {EditableSpan} from "./EditableSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task";
-
 export type TaskType = {
     id: string
     title: string
