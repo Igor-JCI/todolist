@@ -1,22 +1,23 @@
 import React, {useCallback} from "react";
-import {FilterValuesType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task";
-export type TaskType = {
+import {TaskStatuses, TaskType} from "./API/todolists-api";
+import {FilterValuesType} from "./state/todolists-reducer";
+/*export type TaskType = {
     id: string
     title: string
-    isDone: boolean
-}
+    status:TaskStatuses
+}*/
 type PropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (id: string, toDoListId: string) => void
     changeFilter: (toDoListId: string, value: FilterValuesType) => void
     addTask: (text: string, toDoListId: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean, toDoListId: string) => void
+    changeTaskStatus: (taskId: string, status:TaskStatuses, toDoListId: string) => void
     filter: FilterValuesType,
     id: string,
     removeToDoList: (toDoListId: string) => void,
@@ -47,10 +48,10 @@ export const Todolist = React.memo((props: PropsType) => {
     let tasksForTodolist = props.tasks
     console.log(props.filter)
     if (props.filter === "active") {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === false)
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.New)
     }
     if (props.filter === "completed") {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === true)
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed)
     }
     return (
         <div>
@@ -68,7 +69,7 @@ export const Todolist = React.memo((props: PropsType) => {
                                 changeTaskTitle={props.changeTaskTitle}
                                 taskId={t.id}
                                 todoListId={props.id}
-                                isDone={t.isDone}
+                                status={t.status}
                                 title={t.title}
                                 key = {t.id}
                             />

@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TaskType} from "./Todolist";
+import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {AddItemForm} from "./AddItemForm";
-import {Todolist} from "./Todolist";
+import {TaskPriorities, TaskStatuses, TaskType} from "./API/todolists-api";
+import {TodolistsDomainType} from "./state/todolists-reducer";
+import {FilterValuesType} from "././state/todolists-reducer";
 
 /*export const Counter = () => {
     debugger
@@ -20,12 +22,12 @@ import {Todolist} from "./Todolist";
         }}>{data}</div>
     )
 }*/
-export type FilterValuesType = "all" | "active" | "completed"
-export type ToDoListType = {
+/*export type ToDoListType = {
     id: string,
     title: string,
     filter: FilterValuesType
-}
+}*/
+
 export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
@@ -33,28 +35,18 @@ export type TaskStateType = {
 function App() {
     let toDoListId1 = v1()
     let toDoListId2 = v1()
-    let [toDoLists, setToDoLists] = useState<Array<ToDoListType>>([
-        {id: toDoListId1, title: "What to learn", filter: "all"},
-        {id: toDoListId2, title: "What to buy", filter: "all"}
-    ])
+
+    let [toDoLists, setToDoLists] = useState<Array<TodolistsDomainType>>([])
     let [tasksObj, setTasks] = useState<TaskStateType>({
-        [toDoListId1]: [
-            {id: v1(), title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false},
-            {id: v1(), title: "Redux", isDone: false}
-        ],
-        [toDoListId2]: [
-            {id: v1(), title: "Book", isDone: false},
-            {id: v1(), title: "Milk", isDone: true},
-        ]
+        [toDoListId1]: [],
+        [toDoListId2]: []
     })
 
-    const changeStatus = (taskId: string, isDone: boolean, toDoListId: string) => {
+    const changeStatus = (taskId: string, status: TaskStatuses, toDoListId: string) => {
         let tasks = tasksObj[toDoListId]
         let task = tasks.find(t => t.id == taskId)
         if (task) {
-            task.isDone = isDone
+            task.status = status
             setTasks({...tasksObj})
         }
     }
@@ -71,7 +63,10 @@ function App() {
         }
     }
     const addTask = (title: string, toDoListId: string) => {
-        let task = {id: v1(), title: title, isDone: false}
+        let task = {
+            id: v1(), title: title, status: TaskStatuses.New, todoListId: toDoListId, description: "",
+            startDate: "", deadline: "", addedDate: "", order: 0, priority: TaskPriorities.Low
+        }
         let tasks = tasksObj[toDoListId]
         let newTasks = [task, ...tasks]
         tasksObj[toDoListId] = newTasks
@@ -97,7 +92,10 @@ function App() {
         setTasks({...tasksObj})
     }
     const addTodolist = (title: string) => {
-        let todolist: ToDoListType = {id: v1(), title: title, filter: "all"}
+        let todolist: TodolistsDomainType = {
+            id: v1(), title: title, filter: "all", addedDate: "",
+            order: 0
+        }
         setToDoLists([todolist, ...toDoLists])
         setTasks({...tasksObj, [todolist.id]: []})
     }
@@ -133,13 +131,13 @@ function App() {
                             let tasksForTodolist = tasksObj[tl.id]
                             if (tl.filter === "completed") {
                                 tasksForTodolist = tasksObj[tl.id].filter((t) => {
-                                    if (t.isDone === true) {
+                                    if (t.status === TaskStatuses.Completed) {
                                         return true
                                     }
                                 })
                             }
                             if (tl.filter === "active") {
-                                tasksForTodolist = tasksObj[tl.id].filter(t => t.isDone === false)
+                                tasksForTodolist = tasksObj[tl.id].filter(t => t.status === TaskStatuses.New)
                             }
 
                             return <Grid item>
