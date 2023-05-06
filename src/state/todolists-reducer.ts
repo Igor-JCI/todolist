@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {TodolistsType} from "../API/todolists-api";
+import {toDoListsAPI, TodolistsType} from "../API/todolists-api";
+import {Dispatch} from "redux";
 
 export type RemoveTodolistActionType = {
     type: "REMOVE-TODOLIST", id: string
@@ -17,10 +18,15 @@ export type ChangeTodolistFilterActionType = {
     id: string,
     filter: FilterValuesType
 }
+export type SetTodolistsActionType = {
+    type: "SET-TODOLISTS",
+    todolists: Array<TodolistsType>
+}
 type ActionsType = RemoveTodolistActionType
     | AddTodolistActionType
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType
+    | SetTodolistsActionType
 
 export let toDoListId1 = v1()
 export let toDoListId2 = v1()
@@ -38,7 +44,8 @@ export const toDoListsReducer = (state: Array<TodolistsDomainType> = initialStat
             return filteredToDoList
         }
         case "ADD-TODOLIST": {
-            return [{id: action.toDoListId,
+            return [{
+                id: action.toDoListId,
                 title: action.title,
                 filter: "all",
                 addedDate: "",
@@ -58,6 +65,14 @@ export const toDoListsReducer = (state: Array<TodolistsDomainType> = initialStat
                 todolist.filter = action.filter
             }
             return [...state]
+        }
+        case "SET-TODOLISTS": {
+            return action.todolists.map(tl => {
+                return {
+                    ...tl,
+                    filter: "all"
+                }
+            })
         }
         default:
             return state
@@ -80,4 +95,17 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): Ch
     id: id,
     filter: filter
 })
+export const setTodolistsAC = (todolists: Array<TodolistsType>): SetTodolistsActionType => ({
+    type: "SET-TODOLISTS",
+    todolists
+})
+
+export const fetchToDoListTC = () => {
+    return (dispatch: Dispatch) => {
+        toDoListsAPI.getToDoLists()
+            .then((res) => {
+                dispatch(setTodolistsAC(res.data))
+            })
+    }
+}
 

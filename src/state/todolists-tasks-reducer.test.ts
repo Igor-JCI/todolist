@@ -1,10 +1,11 @@
-import {TaskStateType, ToDoListType} from "../App";
-import {addTodolistAC, toDoListsReducer} from "./todolists-reducer";
+import {TaskStateType} from "../App";
+import {addTodolistAC, TodolistsDomainType, toDoListsReducer} from "./todolists-reducer";
 import {tasksReducer} from "./tasks-reducer";
+import {expect, test, beforeEach} from '@jest/globals';
 
 test("ids should be equals", () => {
         const startTasksState: TaskStateType = {}
-        const startTodolistsState: Array<ToDoListType> = []
+        const startTodolistsState: Array<TodolistsDomainType> = []
 
         const action = addTodolistAC("new todolist", "sls;s;s;")
 
