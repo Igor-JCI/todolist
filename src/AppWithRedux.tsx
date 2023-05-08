@@ -14,7 +14,7 @@ import {
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
-import {TaskStatuses, TaskType} from "./API/todolists-api";
+import {TaskStatuses, TaskType, toDoListsAPI} from "./API/todolists-api";
 
 export type TaskStateType = {
     [key: string]: Array<TaskType>
@@ -41,8 +41,14 @@ export function AppWithRedux() {
         dispatch(action)
     }, [dispatch])
     const removeTask = useCallback((id: string, toDoListId: string) => {
-        const action = removeTasksAC(id, toDoListId)
-        dispatch(action)
+        toDoListsAPI.deleteTask(id,toDoListId)
+            .then ((res) => {
+                dispatch()
+                console.log(res)
+            })
+
+        /*const action = removeTasksAC(id, toDoListId)
+        dispatch(action)*/
     }, [dispatch])
     const changeFilter = useCallback((toDoListId: string, value: FilterValuesType) => {
         dispatch(changeTodolistFilterAC(toDoListId, value))

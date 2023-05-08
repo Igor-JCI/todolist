@@ -1,4 +1,5 @@
 import {TaskStateType} from "../App";
+import {Dispatch} from "redux";
 import {v1} from "uuid";
 import {
     AddTodolistActionType,
@@ -8,7 +9,7 @@ import {
 import {TaskPriorities, TaskStatuses, TaskType, toDoListsAPI} from "../API/todolists-api";
 import {Simulate} from "react-dom/test-utils";
 import copy = Simulate.copy;
-import {Dispatch} from "redux";
+
 
 export type RemoveTaskActionType = {
     type: "REMOVE-TASK", taskId: string, toDoListId: string
