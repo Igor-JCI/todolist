@@ -60,7 +60,6 @@ type taskDataType = {
     startDate: string,
     deadline: string
 }
-
 export const toDoListsAPI = {
     getToDoLists() {
         return instance.get<Array<TodolistsType>>("todo-lists")
