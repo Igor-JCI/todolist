@@ -29,7 +29,6 @@ export function AppWithRedux() {
     useEffect(() => {
         dispatch(fetchToDoListTC())
     }, [])
-
     const changeStatus = useCallback((taskId: string, status: TaskStatuses, toDoListId: string) => {
         dispatch(changeTaskStatusAC(taskId, status, toDoListId))
     }, [dispatch])
