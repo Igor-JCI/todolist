@@ -8,13 +8,16 @@ import {Menu} from "@mui/icons-material";
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC, fetchToDoListTC, FilterValuesType,
-    removeTodolistAC, TodolistsDomainType
+    changeTodolistTitleAC,
+    fetchToDoListTC,
+    FilterValuesType,
+    removeTodolistAC,
+    TodolistsDomainType
 } from "./state/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC} from "./state/tasks-reducer";
+import {addTaskAC, addTaskTC, changeTaskStatusAC, changeTaskTitleAC, removeTaskTC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
-import {TaskStatuses, TaskType, toDoListsAPI} from "./API/todolists-api";
+import {TaskStatuses, TaskType} from "./API/todolists-api";
 
 export type TaskStateType = {
     [key: string]: Array<TaskType>
@@ -36,18 +39,18 @@ export function AppWithRedux() {
         dispatch(changeTaskTitleAC(taskId, newTitle, toDoListId))
     }, [dispatch])
     const addTask = useCallback((title: string, toDoListId: string) => {
-        const action = addTaskAC(title, toDoListId)
-        dispatch(action)
+        dispatch(addTaskTC(title,toDoListId))
+        /*const action = addTaskAC(title, toDoListId)
+        dispatch(action)*/
     }, [dispatch])
     const removeTask = useCallback((id: string, toDoListId: string) => {
-        toDoListsAPI.deleteTask(id,toDoListId)
-            .then ((res) => {
-                dispatch()
-                console.log(res)
-            })
-
-        /*const action = removeTasksAC(id, toDoListId)
-        dispatch(action)*/
+        dispatch(removeTaskTC(toDoListId, id))
+        /*toDoListsAPI.deleteTask(toDoListId, id)
+            .then((res) => {
+                if (res.data.resultCode === 0) {
+                    dispatch(removeTasksAC(id, toDoListId))
+                }
+            })*/
     }, [dispatch])
     const changeFilter = useCallback((toDoListId: string, value: FilterValuesType) => {
         dispatch(changeTodolistFilterAC(toDoListId, value))

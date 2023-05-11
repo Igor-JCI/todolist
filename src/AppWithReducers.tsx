@@ -58,7 +58,18 @@ function AppWithReducers() {
         dispatchToTaskReducer(changeTaskTitleAC(taskId, newTitle, toDoListId))
     }
     const addTask = (title: string, toDoListId: string) => {
-        const action = addTaskAC(title, toDoListId)
+        const action = addTaskAC({
+            addedDate: "",
+            deadline: "",
+            description: "",
+            id: "ddldlmm4566",
+            order: 0,
+            priority: 0,
+            startDate: "",
+            status: TaskStatuses.New,
+            title: title,
+            todoListId: toDoListId
+        })
         dispatchToTaskReducer(action)
     }
     const removeTask = (id: string, toDoListId: string) => {
