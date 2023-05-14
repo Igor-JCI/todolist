@@ -52,11 +52,11 @@ type ResponseTasksType = {
     items: TaskType[],
     totalCount: number,
 }
-type taskDataType = {
+export type taskDataType = {
     title: string,
     description: string,
-    status: number,
-    priority: number,
+    status: TaskStatuses,
+    priority: TaskPriorities,
     startDate: string,
     deadline: string
 }
@@ -83,12 +83,11 @@ export const toDoListsAPI = {
         return promise
     },
     deleteTask(toDoListID: string, taskId: string) {
-        debugger
         const promise = instance.delete<ResponseType<{item:TaskType}>>(`todo-lists/${toDoListID}/tasks/${taskId}`)
         return promise
     },
-    UpdateTaskTitle(toDoListID: string, taskId: string, model: taskDataType) {
-        const promise = axios.put<ResponseType<{ item: taskDataType }>>(`todo-lists/${toDoListID}/tasks/${taskId}`, model)
+    UpdateTaskTitle(toDoListID: string,taskId: string,  model: taskDataType) {
+        const promise = instance.put<ResponseType<{ item: taskDataType }>>(`todo-lists/${toDoListID}/tasks/${taskId}`, model)
         return promise
     }
 }

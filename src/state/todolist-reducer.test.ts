@@ -5,7 +5,6 @@ import {
     removeTodolistAC,
     toDoListsReducer
 } from "./todolists-reducer";
-import {expect, test, beforeEach} from '@jest/globals';
 
 /*beforeEach(() => {
     let toDoListId1 = v1()
@@ -38,7 +37,12 @@ test("correct todolist should be added", () => {
             {id: toDoListId2, title: "What to buy", filter: "all", addedDate: "", order: 0}
         ]
         const endState = toDoListsReducer(startState,
-            addTodolistAC(newTodolistTitle, toDoListId1))
+            addTodolistAC({
+                id: toDoListId1,
+                title: newTodolistTitle,
+                addedDate: "",
+                order: 0
+            }))
 
         expect(endState.length).toBe(3)
         expect(endState[0].title).toBe(newTodolistTitle)

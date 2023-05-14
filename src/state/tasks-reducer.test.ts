@@ -1,7 +1,7 @@
 import {TaskStateType} from "../App";
 import {
     addTaskAC,
-    changeTaskStatusAC,
+    updateTaskAC,
     changeTaskTitleAC,
     removeTasksAC,
     setTasksAC,
@@ -9,7 +9,7 @@ import {
 } from "./tasks-reducer";
 import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "./todolists-reducer";
 import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
-import {expect, test, beforeEach} from '@jest/globals';
+
 
 test("correct task should be deleted from correct array", () => {
     const startState: TaskStateType = {
@@ -135,7 +135,14 @@ test("status of specified task should be changed", () => {
             }
         ]
     }
-    const action = changeTaskStatusAC("2", TaskStatuses.New, "toDoListId2")
+    const action = updateTaskAC("2", {
+        title: "lsl;",
+        description: "",
+        status: TaskStatuses.New,
+        priority: TaskPriorities.Low,
+        startDate: "",
+        deadline: ""
+    }, "toDoListId2")
     const endState = tasksReducer(startState, action)
 
     expect(endState["toDoListId2"][1].status).toBe(TaskStatuses.New)
@@ -210,7 +217,12 @@ test("new property with new array should be added when new todolist is added ", 
             }
         ]
     }
-    const action = addTodolistAC("title no matter", "toDoListId3")
+    const action = addTodolistAC({
+        id: "toDoListId3",
+        title: "title no matter",
+        addedDate: "",
+        order: 0
+    })
     const endState = tasksReducer(startState, action)
 
     const keys = Object.keys(endState)
@@ -305,7 +317,6 @@ test("empty arrays should be added when we set todolist", () => {
     expect(endState["1"]).toStrictEqual([])
     expect(endState["2"]).toStrictEqual([])
 })
-
 test("tasks should be added for todolist", () => {
     const startState: TaskStateType = {
         "toDoListId1": [
