@@ -139,7 +139,6 @@ export const addTaskTC = (title: string, toDoListId: string) => {
     }
 }
 
-
 export type UpdateDomainTaskModelType = {
     title?: string,
     description?: string,
