@@ -128,7 +128,6 @@ export const removeTaskTC = (toDoListId: string, taskId: string) => {
             })
     }
 }
-
 export const addTaskTC = (title: string, toDoListId: string) => {
     return (dispatch: Dispatch) => {
         toDoListsAPI.createTask(toDoListId, title)
