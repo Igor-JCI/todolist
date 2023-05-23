@@ -21,7 +21,6 @@ import {TaskStatuses, TaskType} from "./API/todolists-api";
 export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
-
 export function AppWithRedux() {
     console.log("App is called")
     const dispatch: any = useDispatch()
