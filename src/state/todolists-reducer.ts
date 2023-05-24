@@ -111,7 +111,6 @@ export const addTodolistTC = (title: string) => {
             })
     }
 }
-
 export const removeToDoListTC = (toDoListId: string) => {
     return (dispatch: Dispatch) => {
         toDoListsAPI.deleteTodolist(toDoListId)
