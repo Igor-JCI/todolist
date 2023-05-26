@@ -102,7 +102,6 @@ export const fetchToDoListTC = () => {
             })
     }
 }
-
 export const addTodolistTC = (title: string) => {
     return (dispatch: Dispatch) => {
         toDoListsAPI.createToDoList(title)
