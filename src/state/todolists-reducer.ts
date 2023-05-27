@@ -118,7 +118,6 @@ export const removeToDoListTC = (toDoListId: string) => {
             })
     }
 }
-
 export const changeTodolistTitleTC = (toDoListId: string, newTitle: string) => {
     return (dispatch: Dispatch) => {
         toDoListsAPI.UpdateTodolistTitle(toDoListId, newTitle)
