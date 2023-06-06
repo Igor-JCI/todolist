@@ -17,7 +17,6 @@ import {addTaskTC, removeTaskTC, updateTaskTC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
 import {TaskStatuses, TaskType} from "./API/todolists-api";
-
 export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
