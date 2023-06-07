@@ -35,7 +35,6 @@ export type FilterValuesType = "all" | "active" | "completed"
 export type TodolistsDomainType = TodolistsType & {
     filter: FilterValuesType
 }
-
 export const toDoListsReducer = (state: Array<TodolistsDomainType> = initialState, action: ActionsType): Array<TodolistsDomainType> => {
     switch (action.type) {
         case "REMOVE-TODOLIST": {
