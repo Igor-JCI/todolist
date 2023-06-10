@@ -9,5 +9,4 @@ ReactDOM.render(
     <Provider store={store}>
         <AppWithRedux/>
     </Provider>, document.getElementById('root'));
-
 serviceWorker.unregister();
