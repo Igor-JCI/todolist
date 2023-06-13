@@ -21,6 +21,7 @@ export type SetTodolistsActionType = {
     type: "SET-TODOLISTS",
     todolists: Array<TodolistsType>
 }
+
 type ActionsType = RemoveTodolistActionType
     | AddTodolistActionType
     | ChangeTodolistTitleActionType
