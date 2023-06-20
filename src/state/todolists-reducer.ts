@@ -3,6 +3,7 @@ import {toDoListsAPI, TodolistsType} from "../API/todolists-api";
 import {Dispatch} from "redux";
 
 
+
 export type RemoveTodolistActionType = {
     type: "REMOVE-TODOLIST", id: string
 }
