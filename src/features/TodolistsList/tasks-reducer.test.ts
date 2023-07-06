@@ -1,4 +1,4 @@
-import {TaskStateType} from "../App";
+import {TaskStateType} from "../../trash/App";
 import {
     addTaskAC,
     updateTaskAC,
@@ -8,7 +8,7 @@ import {
     tasksReducer
 } from "./tasks-reducer";
 import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "./todolists-reducer";
-import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
+import {TaskPriorities, TaskStatuses} from "../../API/todolists-api";
 
 
 test("correct task should be deleted from correct array", () => {

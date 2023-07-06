@@ -1,17 +1,31 @@
 import React from 'react';
-/*import AppWithRedux from "../AppWithRedux";
+import App from "./App";
+import {ReduxStoreProviderDecorator} from "../stories/ReduxStoreProviderDecorator";
+
+export default {
+    title: "App Stories",
+    component: App,
+    decorators: [ReduxStoreProviderDecorator]
+}
+
+export const AppBaseExample = (props: any) => {
+    return (<App/>)
+}
+
+
+/*import App from "../App";
 import {Provider} from "react-redux";
 import {store} from "./../state/store";
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 
 export default {
-  title: "AppWithRedux Component",
-  component: AppWithRedux,
+  title: "App Component",
+  component: App,
   decorators:[ReduxStoreProviderDecorator]
 }
 
 export const AppWithReduxBaseExample = (props:any) => {
-  return<Provider store={store}><AppWithRedux/></Provider>
+  return<Provider store={store}><App/></Provider>
 
 }
 

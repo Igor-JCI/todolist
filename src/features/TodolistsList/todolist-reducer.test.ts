@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {FilterValuesType, setTodolistsAC, TodolistsDomainType} from ".././state/todolists-reducer";
+import {FilterValuesType, setTodolistsAC, TodolistsDomainType} from "./todolists-reducer";
 import {
     addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC,
     removeTodolistAC,
