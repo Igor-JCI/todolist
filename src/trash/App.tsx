@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import './App.css';
-import {Todolist} from "./Todolist";
+import '../app/App.css';
+import {Todolist} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
-import {AddItemForm} from "./AddItemForm";
-import {TaskPriorities, TaskStatuses, TaskType} from "./API/todolists-api";
-import {TodolistsDomainType} from "./state/todolists-reducer";
-import {FilterValuesType} from "././state/todolists-reducer";
+import {AddItemForm} from "../components/AddItemForm/AddItemForm";
+import {TaskPriorities, TaskStatuses, TaskType} from "../API/todolists-api";
+import {TodolistsDomainType} from "../features/TodolistsList/todolists-reducer";
+import {FilterValuesType} from "../features/TodolistsList/todolists-reducer";
 
 /*export const Counter = () => {
     debugger

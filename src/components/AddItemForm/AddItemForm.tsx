@@ -4,7 +4,7 @@ import {ControlPoint} from "@mui/icons-material";
 type AddItemFormPropsType = {
     addItem: (title: string) => void,
 }
-export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     console.log("Form is called")
     let [title, setTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
