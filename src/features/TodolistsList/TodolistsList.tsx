@@ -16,7 +16,6 @@ import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 
-
 export const TodolistsList: React.FC = () => {
     const dispatch: any = useDispatch()
     const toDoLists = useSelector<AppRootState, Array<TodolistsDomainType>>(state => state.toDoLists)
