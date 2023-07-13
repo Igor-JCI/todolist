@@ -20,7 +20,6 @@ export const TodolistsList: React.FC = () => {
     const dispatch: any = useDispatch()
     const toDoLists = useSelector<AppRootState, Array<TodolistsDomainType>>(state => state.toDoLists)
     const tasksObj = useSelector<AppRootState, TaskStateType>(state => state.tasks)
-
     useEffect(() => {
         dispatch(fetchToDoListTC())
     }, [])
