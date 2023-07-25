@@ -3,6 +3,7 @@ import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType,
 import {taskDataType, TaskPriorities, TaskStatuses, TaskType, toDoListsAPI} from "../../API/todolists-api";
 import {AppRootState} from "../../app/store";
 
+
 const initialState: TaskStateType = {}
 
 export const tasksReducer = (state: TaskStateType = initialState, action: ActionsType): TaskStateType => {
