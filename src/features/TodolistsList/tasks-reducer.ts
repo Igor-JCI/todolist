@@ -147,3 +147,4 @@ type ActionsType =
 export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
+
