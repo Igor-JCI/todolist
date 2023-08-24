@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import {AppBar, Button, Container, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
+import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
 
 
 function App() {
-
-
     return (
         <div className="App">
+            <ErrorSnackbar/>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
@@ -20,6 +20,7 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+                <LinearProgress />
             </AppBar>
             <Container fixed>
                 <TodolistsList/>
