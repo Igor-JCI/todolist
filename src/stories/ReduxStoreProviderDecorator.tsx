@@ -53,6 +53,10 @@ const initialGlobalState: AppRootState = {
                 priority: TaskPriorities.Low
             }
         ]
+    },
+    app:{
+        status: "idle",
+        error:null
     }
 }
 

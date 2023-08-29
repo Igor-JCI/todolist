@@ -20,7 +20,7 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                <LinearProgress />
+                {/*<LinearProgress />*/}
             </AppBar>
             <Container fixed>
                 <TodolistsList/>
