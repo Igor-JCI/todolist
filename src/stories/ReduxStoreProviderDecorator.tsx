@@ -17,11 +17,11 @@ const initialGlobalState: AppRootState = {
     toDoLists: [
         {
             id: 'todolistId1', title: 'What to learn', filter: 'all', addedDate: "",
-            order: 0
+            order: 0, entityStatus:"idle"
         },
         {
             id: 'todolistId2', title: 'What to buy', filter: 'all', addedDate: "",
-            order: 0
+            order: 0, entityStatus:"idle"
         }
     ],
     tasks: {
