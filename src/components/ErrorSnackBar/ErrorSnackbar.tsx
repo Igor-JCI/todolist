@@ -27,7 +27,6 @@ export function ErrorSnackbar() {
         /* setOpen(false);*/
     };
 
-
     const isOpen = error !== null
 
     return (
