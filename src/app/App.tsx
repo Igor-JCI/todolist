@@ -8,11 +8,14 @@ import {useSelector} from "react-redux";
 import {AppRootState} from "./store";
 import {RequestStatusType} from "./app-reducer";
 
+type PropsType = {
+    demo?: boolean
+}
 
-function App() {
-    const status = useSelector<AppRootState,RequestStatusType>(state => state.app.status)
+function App({demo = false}: PropsType) {
+    const status = useSelector<AppRootState, RequestStatusType>(state => state.app.status)
 
-    
+
     return (
         <div className="App">
             <ErrorSnackbar/>
@@ -29,7 +32,7 @@ function App() {
                 {status === "loading" && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistsList/>
+                <TodolistsList demo={demo}/>
             </Container>
         </div>
     );
