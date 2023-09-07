@@ -93,7 +93,7 @@ function App() {
     }
     const addTodolist = (title: string) => {
         let todolist: TodolistsDomainType = {
-            id: v1(), title: title, filter: "all", addedDate: "",
+            id: v1(), title: title, filter: "all", addedDate: "",entityStatus:"idle",
             order: 0
         }
         setToDoLists([todolist, ...toDoLists])
@@ -144,14 +144,12 @@ function App() {
                                 <Paper style={{padding: "10px"}}>
                                     <Todolist
                                         key={tl.id}
-                                        title={tl.title}
-                                        id={tl.id}
+                                        todolist={tl}
                                         tasks={tasksForTodolist}
                                         removeTask={removeTask}
                                         changeFilter={changeFilter}
                                         addTask={addTask}
                                         changeTaskStatus={changeStatus}
-                                        filter={tl.filter}
                                         removeToDoList={removeToDoList}
                                         changeTaskTitle={changeTaskTitle}
                                         changeTodolistTitle={changeTodolistTitle}

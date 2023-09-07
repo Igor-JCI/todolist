@@ -16,7 +16,7 @@ import {addTaskAC, updateTaskAC, removeTasksAC, tasksReducer} from "../features/
 import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
 
 
-function AppWithReducers() {
+/*function AppWithReducers() {
     let toDoListId1 = v1()
     let toDoListId2 = v1()
     let [toDoLists, dispatchToToDolListsReducer] = useReducer(toDoListsReducer, [
@@ -155,6 +155,6 @@ function AppWithReducers() {
             </Container>
         </div>
     );
-}
+}*/
 
 /*export default AppWithReducers;*/
