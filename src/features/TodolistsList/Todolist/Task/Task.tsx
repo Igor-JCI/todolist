@@ -32,3 +32,4 @@ export const Task = React.memo((props: TaskPropsType) => {
         </div>
     )
 })
+
