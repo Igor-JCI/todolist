@@ -11,9 +11,9 @@ import {useFormik} from "formik";
 
 export const Login = () => {
     const formik = useFormik({
-        validate: (values) =>{
-            return{
-                email:""
+        validate: (values) => {
+            return {
+                email: ""
             }
         },
         initialValues: {
@@ -49,9 +49,10 @@ export const Login = () => {
                                    margin="normal"
                                    {...formik.getFieldProps("password")}
                         />
-                        <FormControlLabel label={'Remember me'} control={<Checkbox/>}
-                                          {...formik.getFieldProps("rememberMe")}
-                                          checked={formik.values.rememberMe}
+                        <FormControlLabel label={'Remember me'} control={<Checkbox
+                            {...formik.getFieldProps("rememberMe")}
+                            checked={formik.values.rememberMe}
+                        />}
                         />
                         <Button type={'submit'} variant={'contained'} color={'primary'}>
                             Login
