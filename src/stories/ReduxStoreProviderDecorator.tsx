@@ -8,23 +8,25 @@ import {toDoListsReducer} from '../features/TodolistsList/todolists-reducer'
 import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
 import {appReducer} from "../app/app-reducer";
 import thunkMiddleWare from "redux-thunk";
+import {authReducer} from "../features/Login/auth-reducer";
 
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: toDoListsReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 
 const initialGlobalState: AppRootState = {
     toDoLists: [
         {
             id: 'todolistId1', title: 'What to learn', filter: 'all', addedDate: "",
-            order: 0, entityStatus:"idle"
+            order: 0, entityStatus: "idle"
         },
         {
             id: 'todolistId2', title: 'What to buy', filter: 'all', addedDate: "",
-            order: 0, entityStatus:"loading"
+            order: 0, entityStatus: "loading"
         }
     ],
     tasks: {
@@ -57,9 +59,12 @@ const initialGlobalState: AppRootState = {
             }
         ]
     },
-    app:{
+    app: {
         status: "idle",
-        error:null
+        error: null
+    },
+    auth: {
+        isLoggedIn: false
     }
 }
 

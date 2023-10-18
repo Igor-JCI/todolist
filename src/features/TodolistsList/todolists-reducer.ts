@@ -1,7 +1,8 @@
 import {v1} from "uuid";
 import {toDoListsAPI, TodolistsType} from "../../API/todolists-api";
 import {Dispatch} from "redux";
-import {RequestStatusType, setAppStatusAC, SetAppStatusActionType} from "../../app/app-reducer";
+import {RequestStatusType, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../app/app-reducer";
+import {handleServerNetworkError} from "../../utils/error-utils";
 
 export let toDoListId1 = v1()
 export let toDoListId2 = v1()
@@ -64,6 +65,9 @@ export const fetchToDoListTC = () => {
                 dispatch(setTodolistsAC(res.data))
                 dispatch(setAppStatusAC("succeeded"))
             })
+            .catch(error =>{
+                handleServerNetworkError(error,dispatch)
+            })
     }
 }
 export const addTodolistTC = (title: string) => {
@@ -79,7 +83,7 @@ export const addTodolistTC = (title: string) => {
 export const removeToDoListTC = (toDoListId: string) => {
     return (dispatch: ThunkDispatch) => {
         dispatch(setAppStatusAC("loading"))
-        dispatch(changeTodolistEntityStatusAC(toDoListId,"loading"))
+        dispatch(changeTodolistEntityStatusAC(toDoListId, "loading"))
         toDoListsAPI.deleteTodolist(toDoListId)
             .then((res) => {
                 dispatch(removeTodolistAC(toDoListId))
@@ -97,7 +101,7 @@ export const changeTodolistTitleTC = (toDoListId: string, newTitle: string) => {
 }
 
 //types
-type ThunkDispatch = Dispatch<ActionsType | SetAppStatusActionType>
+type ThunkDispatch = Dispatch<ActionsType | SetAppStatusActionType| SetAppErrorActionType>
 export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
 export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>

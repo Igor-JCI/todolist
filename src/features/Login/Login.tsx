@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -8,12 +8,31 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
+import {useDispatch, useSelector} from "react-redux";
+import {loginTC} from "./auth-reducer";
+import {LoginParamsType} from "../../API/todolists-api";
+import {AppRootState} from "../../app/store";
+import {Navigate} from "react-router-dom";
 
 export const Login = () => {
+    const dispatch = useDispatch()
+    const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
+    if (isLoggedIn) {
+        return <Navigate to = {"/"}/>
+    }
+
+
     const formik = useFormik({
         validate: (values) => {
-            return {
-                email: ""
+            if (!values.email) {
+                return {
+                    email: "email is requred"
+                }
+            }
+            if (!values.password) {
+                return {
+                    password: "password is requred"
+                }
             }
         },
         initialValues: {
@@ -22,7 +41,7 @@ export const Login = () => {
             rememberMe: false
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            dispatch(loginTC(values))
         },
     });
 
@@ -45,10 +64,12 @@ export const Login = () => {
                         <TextField label="Email" margin="normal"
                                    {...formik.getFieldProps("email")}
                         />
+                        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
                         <TextField type="password" label="Password"
                                    margin="normal"
                                    {...formik.getFieldProps("password")}
                         />
+                        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
                         <FormControlLabel label={'Remember me'} control={<Checkbox
                             {...formik.getFieldProps("rememberMe")}
                             checked={formik.values.rememberMe}
