@@ -17,10 +17,6 @@ import {Navigate} from "react-router-dom";
 export const Login = () => {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
-    if (isLoggedIn) {
-        return <Navigate to = {"/"}/>
-    }
-
 
     const formik = useFormik({
         validate: (values) => {
@@ -45,6 +41,9 @@ export const Login = () => {
         },
     });
 
+    if (isLoggedIn) {
+        return <Navigate to = {"/"}/>
+    }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>

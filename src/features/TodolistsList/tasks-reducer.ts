@@ -20,8 +20,8 @@ const slice = createSlice({
                 tasks.splice(index, 1)
             }
         },
-        addTaskAC(state, action: PayloadAction<{ task: TaskType }>) {
-            state[action.payload.task.todoListId].unshift(action.payload.task)
+        addTaskAC(state, action: PayloadAction<TaskType>) {
+            state[action.payload.todoListId].unshift(action.payload)
         },
         updateTaskAC(state, action: PayloadAction<{ taskId: string, model: UpdateDomainTaskModelType, toDoListId: string }>) {
             const tasks = state[action.payload.toDoListId]
@@ -50,10 +50,7 @@ const slice = createSlice({
 })
 
 export const tasksReducer = slice.reducer
-export const {removeTasksAC} = slice.actions
-export const {addTaskAC} = slice.actions
-export const {updateTaskAC} = slice.actions
-export const {setTasksAC} = slice.actions
+export const {removeTasksAC, addTaskAC, updateTaskAC, setTasksAC} = slice.actions
 
 //thunks
 export const fetchTasksTC = (todolistId: string) => {
@@ -82,7 +79,8 @@ export const addTaskTC = (title: string, toDoListId: string) => {
         toDoListsAPI.createTask(toDoListId, title)
             .then((res) => {
                 if (res.data.resultCode === 0) {
-                    dispatch(addTaskAC({task: res.data.data.item}))
+                    const task = res.data.data.item;
+                    dispatch(addTaskAC(task))
                     dispatch(setAppStatusAC({status: "succeeded"}))
                 } else {
                     handleServerAppError(res.data, dispatch)
