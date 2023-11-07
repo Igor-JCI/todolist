@@ -6,14 +6,13 @@ import {appReducer} from "./app-reducer";
 import {authReducer} from "../features/Login/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
-export type AppRootState = ReturnType<typeof rootReducer>
-
-const rootReducer = combineReducers({
+const rootReducer  = combineReducers({
     toDoLists: toDoListsReducer,
     tasks: tasksReducer,
     app: appReducer,
-    auth: authReducer
+    auth: authReducer,
 })
+
 /*export const store = createStore(rootReducer, applyMiddleware(thunkMiddleWare))*/
 
 export const store = configureStore({
@@ -21,6 +20,9 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunkMiddleWare),
 
 })
+
+export type RootReducerType = typeof rootReducer
+export type AppRootState = ReturnType<RootReducerType>
 
 
 // @ts-ignore

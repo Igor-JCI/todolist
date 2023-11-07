@@ -46,6 +46,6 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {
     status: RequestStatusType,
     error: string | null,
-    //true когда приложение проинициализировалось (проверка логинизации, проверили юзера, настроййки получили и т.д.)
     isInitialized: boolean
+    //true когда приложение проинициализировалось (проверка логинизации, проверили юзера, настроййки получили и т.д.)
 }
