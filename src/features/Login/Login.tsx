@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -7,42 +7,55 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {useFormik} from "formik";
-import {useDispatch, useSelector} from "react-redux";
+import {FormikHelpers, useFormik} from "formik";
+import {useSelector} from "react-redux";
 import {loginTC} from "./auth-reducer";
-import {LoginParamsType} from "../../API/todolists-api";
-import {AppRootState} from "../../app/store";
+import {AppRootState, useAppDispatch} from "../../app/store";
 import {Navigate} from "react-router-dom";
 
 export const Login = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
+    type FormValuesType = {
+        email: string,
+        password: string,
+        rememberMe: boolean
+    }
 
     const formik = useFormik({
-        validate: (values) => {
-            if (!values.email) {
-                return {
-                    email: "email is requred"
+            validate: (values) => {
+                if (!values.email) {
+                    return {
+                        email: "email is requred"
+                    }
+                }
+                if (!values.password) {
+                    return {
+                        password: "password is requred"
+                    }
+                }
+            },
+            initialValues: {
+                email: "",
+                password: "",
+                rememberMe: false
+            },
+            onSubmit: async (values: FormValuesType, formikHelpers: FormikHelpers<FormValuesType>) => {
+                const action = await dispatch(loginTC(values))
+                if (loginTC.rejected.match(action)) {
+                    if (action.payload?.fieldsError?.length) {
+                        const error = action.payload?.fieldsError[0]
+                        formikHelpers.setFieldError(error.field, error.error)
+                    } else {
+
+                    }
                 }
             }
-            if (!values.password) {
-                return {
-                    password: "password is requred"
-                }
-            }
-        },
-        initialValues: {
-            email: "",
-            password: "",
-            rememberMe: false
-        },
-        onSubmit: values => {
-            dispatch(loginTC(values))
-        },
-    });
+        })
+    ;
 
     if (isLoggedIn) {
-        return <Navigate to = {"/"}/>
+        return <Navigate to={"/"}/>
     }
 
     return <Grid container justifyContent={'center'}>

@@ -35,28 +35,28 @@ export const toDoListsAPI = {
         return promise
     },
     deleteTask(toDoListID: string, taskId: string) {
-        const promise = instance.delete<ResponseType<{item:TaskType}>>(`todo-lists/${toDoListID}/tasks/${taskId}`)
+        const promise = instance.delete<ResponseType<{ item: TaskType }>>(`todo-lists/${toDoListID}/tasks/${taskId}`)
         return promise
     },
-    UpdateTaskTitle(toDoListID: string,taskId: string,  model: taskDataType) {
+    UpdateTaskTitle(toDoListID: string, taskId: string, model: taskDataType) {
         const promise = instance.put<ResponseType<{ item: taskDataType }>>(`todo-lists/${toDoListID}/tasks/${taskId}`, model)
         return promise
     }
 }
 export const authAPI = {
-    login (data:LoginParamsType) {
-        return instance.post<ResponseType<{userId?:number}>>("auth/login", data)
+    login(data: LoginParamsType) {
+        return instance.post<ResponseType<{ userId?: number }>>("auth/login", data)
     },
-    logout () {
+    logout() {
         return instance.delete<ResponseType>("auth/me")
     },
-    me () {
-        return instance.get<ResponseType<{id: number, email: string, login: string}>>("auth/me")
+    me() {
+        return instance.get<ResponseType<{ id: number, email: string, login: string }>>("auth/me")
     }
 }
 
 //types
-export type LoginParamsType = {
+export type  LoginParamsType = {
     email: string,
     password: string,
     rememberMe: boolean,
@@ -68,12 +68,14 @@ export type TodolistsType = {
     addedDate: string,
     order: number
 }
+
 export enum TaskStatuses {
     New = 0,
     InProgress = 1,
     Completed = 2,
     Draft = 3
 }
+
 export enum TaskPriorities {
     Low = 0,
     Middle = 1,
@@ -81,6 +83,7 @@ export enum TaskPriorities {
     Urgently = 3,
     Later = 4
 }
+
 export type TaskType = {
     addedDate: string,
     deadline: string,
@@ -93,11 +96,12 @@ export type TaskType = {
     title: string,
     todoListId: string
 }
+export type FieldErrorType = { field: string, error: string };
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: string[],
     data: D,
-    fieldsErrors: string[],
+    fieldsErrors?: Array<FieldErrorType>,
 }
 type ResponseTasksType = {
     error: null | string,

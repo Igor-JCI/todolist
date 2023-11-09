@@ -5,8 +5,9 @@ import thunkMiddleWare from "redux-thunk";
 import {appReducer} from "./app-reducer";
 import {authReducer} from "../features/Login/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import {useDispatch} from "react-redux";
 
-const rootReducer  = combineReducers({
+const rootReducer = combineReducers({
     toDoLists: toDoListsReducer,
     tasks: tasksReducer,
     app: appReducer,
@@ -24,6 +25,8 @@ export const store = configureStore({
 export type RootReducerType = typeof rootReducer
 export type AppRootState = ReturnType<RootReducerType>
 
+type AppDispatchType = typeof store.dispatch
+export const useAppDispatch = () => useDispatch<AppDispatchType>()
 
 // @ts-ignore
 window.store = store
