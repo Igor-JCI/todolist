@@ -35,10 +35,10 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     }, [])
 
     const changeStatus = useCallback((taskId: string, status: TaskStatuses, toDoListId: string) => {
-        dispatch(updateTaskTC(taskId, {status: status}, toDoListId))
+        dispatch(updateTaskTC({taskId, model: {status: status}, toDoListId}))
     }, [dispatch])
     const changeTaskTitle = useCallback((taskId: string, newTitle: string, toDoListId: string) => {
-        dispatch(updateTaskTC(taskId, {title: newTitle}, toDoListId))
+        dispatch(updateTaskTC({taskId, model: {title: newTitle}, toDoListId}))
         /* dispatch(changeTaskTitleAC(taskId, newTitle, toDoListId))*/
     }, [dispatch])
     const addTask = useCallback((title: string, toDoListId: string) => {
