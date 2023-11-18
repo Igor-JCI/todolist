@@ -6,13 +6,10 @@ import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
-    addTodolistAC,
-    changeTodolistFilterAC,
-    changeTodolistTitleAC, FilterValuesType,
-    removeTodolistAC,
+    changeTodolistFilterAC, FilterValuesType,
     toDoListsReducer
 } from "../features/TodolistsList/todolists-reducer";
-import {addTaskAC, updateTaskAC, tasksReducer} from "../features/TodolistsList/tasks-reducer";
+import { tasksReducer} from "../features/TodolistsList/tasks-reducer";
 import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
 
 

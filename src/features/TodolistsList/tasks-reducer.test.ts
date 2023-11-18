@@ -1,6 +1,6 @@
 import {TaskStateType} from "../../trash/App";
 import {addTaskTC, fetchTasksTC, removeTaskTC, tasksReducer, updateTaskTC} from "./tasks-reducer";
-import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "./todolists-reducer";
+import {addTodolistTC, fetchToDoListTC, removeToDoListTC} from "./todolists-reducer";
 import {TaskPriorities, TaskStatuses} from "../../API/todolists-api";
 
 let startState: TaskStateType = {}
@@ -95,14 +95,15 @@ test("title of specified task should be changed", () => {
     expect(endState["toDoListId1"][1].title).toBe("JS")
 })
 test("new array should be added when new todolist is added ", () => {
-    const action = addTodolistAC({
+    let payload = {
         todolist: {
             id: "toDoListId3",
             title: "title no matter",
             addedDate: "",
             order: 0
         }
-    })
+    };
+    const action = addTodolistTC.fulfilled(payload, "", payload.todolist.title)
     const endState = tasksReducer(startState, action)
     const keys = Object.keys(endState)
     const newKey = keys.find(k => k != "toDoListId1" && k != "toDoListId2")
@@ -114,7 +115,8 @@ test("new array should be added when new todolist is added ", () => {
     expect(endState[newKey]).toEqual([])
 })
 test("property with todolistId should be deleted", () => {
-    const action = removeTodolistAC({id: "toDoListId2"})
+    let payload = {id: "toDoListId2"};
+    const action = removeToDoListTC.fulfilled(payload,"", payload.id)
     const endState = tasksReducer(startState, action)
     const keys = Object.keys(endState)
 
@@ -122,12 +124,13 @@ test("property with todolistId should be deleted", () => {
     expect(endState["toDoListId2"]).toBeUndefined()
 })
 test("empty arrays should be added when we set todolist", () => {
-    const action = setTodolistsAC({
+    let payload = {
         todolists: [
             {id: "1", title: "title 1", addedDate: "", order: 0},
             {id: "2", title: "title 2", addedDate: "", order: 0}
         ]
-    })
+    };
+    const action = fetchToDoListTC.fulfilled(payload, "")
     const endState = tasksReducer({}, action)
     const keys = Object.keys(endState)
 

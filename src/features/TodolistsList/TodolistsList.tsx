@@ -57,7 +57,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         dispatch(addTodolistTC(title))
     }, [dispatch])
     const changeTodolistTitle = useCallback((toDoListId: string, newTitle: string) => {
-        dispatch(changeTodolistTitleTC(toDoListId, newTitle))
+        dispatch(changeTodolistTitleTC({toDoListId, newTitle}))
     }, [dispatch])
 
     if (!isLoggedIn) {

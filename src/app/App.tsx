@@ -14,7 +14,7 @@ import {Menu} from "@mui/icons-material";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "./store";
+import {AppDispatchType, AppRootState} from "./store";
 import {initializeAppTC, RequestStatusType} from "./app-reducer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
@@ -28,7 +28,7 @@ function App({demo = false}: PropsType) {
     const status = useSelector<AppRootState, RequestStatusType>(state => state.app.status)
     const isInitialized = useSelector<AppRootState, boolean>(state => state.app.isInitialized)
     const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatchType>()
     useEffect(() => {
         if (!demo) {
             dispatch(initializeAppTC())
@@ -49,7 +49,7 @@ function App({demo = false}: PropsType) {
     return (
             <div className="App">
                 <ErrorSnackbar/>
-                <AppBar position="static">
+                <AppBar position="static">K
                     <Toolbar>
                         <IconButton edge="start" color="inherit" aria-label="menu">
                             <Menu/>

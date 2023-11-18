@@ -25,7 +25,7 @@ export const store = configureStore({
 export type RootReducerType = typeof rootReducer
 export type AppRootState = ReturnType<RootReducerType>
 
-type AppDispatchType = typeof store.dispatch
+export type AppDispatchType = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
 
 // @ts-ignore
