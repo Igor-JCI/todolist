@@ -7,7 +7,7 @@ import {Task} from "./Task/Task";
 import {TaskStatuses, TaskType} from "../../../API/todolists-api";
 import {FilterValuesType, TodolistsDomainType} from "../todolists-reducer";
 import {useDispatch} from "react-redux";
-import {fetchTasksTC} from "../tasks-reducer";
+import {fetchTasksTC} from "../task-actions";
 
 
 type PropsType = {

@@ -10,12 +10,13 @@ import Button from '@mui/material/Button';
 import {FormikHelpers, useFormik} from "formik";
 import {useSelector} from "react-redux";
 import {loginTC} from "./auth-reducer";
-import {AppRootState, useAppDispatch} from "../../app/store";
+import {useAppDispatch} from "../../app/store";
 import {Navigate} from "react-router-dom";
+import {authSelectors} from "./";
 
 export const Login = () => {
     const dispatch = useAppDispatch()
-    const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn)
     type FormValuesType = {
         email: string,
         password: string,

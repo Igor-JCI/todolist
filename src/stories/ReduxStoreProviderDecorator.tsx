@@ -8,7 +8,7 @@ import {toDoListsReducer} from '../features/TodolistsList/todolists-reducer'
 import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
 import {appReducer} from "../app/app-reducer";
 import thunkMiddleWare from "redux-thunk";
-import {authReducer} from "../features/Login/auth-reducer";
+import {authReducer} from "../features/Auth/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {BrowserRouter, MemoryRouter} from "react-router-dom";
 

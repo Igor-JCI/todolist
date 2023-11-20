@@ -14,21 +14,25 @@ import {Menu} from "@mui/icons-material";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatchType, AppRootState} from "./store";
-import {initializeAppTC, RequestStatusType} from "./app-reducer";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Login} from "../features/Login/Login";
-import {logoutTC} from "../features/Login/auth-reducer";
+import {AppDispatchType} from "./store";
+import {initializeAppTC} from "./app-reducer";
+import {Route, Routes} from "react-router-dom";
+import {Login} from "../features/Auth/Login";
+import {logoutTC} from "../features/Auth/auth-reducer";
+import {appSelectors} from "./";
+import {authSelectors} from "../features/Auth";
 
 type PropsType = {
     demo?: boolean
 }
 
 function App({demo = false}: PropsType) {
-    const status = useSelector<AppRootState, RequestStatusType>(state => state.app.status)
-    const isInitialized = useSelector<AppRootState, boolean>(state => state.app.isInitialized)
-    const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
+    const status = useSelector(appSelectors.selectStatus)
+    const isInitialized = useSelector(appSelectors.selectIsInitialized)
+    const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn)
+
     const dispatch = useDispatch<AppDispatchType>()
+
     useEffect(() => {
         if (!demo) {
             dispatch(initializeAppTC())
@@ -47,27 +51,27 @@ function App({demo = false}: PropsType) {
 
 
     return (
-            <div className="App">
-                <ErrorSnackbar/>
-                <AppBar position="static">K
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" aria-label="menu">
-                            <Menu/>
-                        </IconButton>
-                        <Typography variant="h6">
-                            News
-                        </Typography>
-                        {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
-                    </Toolbar>
-                    {status === "loading" && <LinearProgress/>}
-                </AppBar>
-                <Container fixed>
-                    <Routes>
-                        <Route path={"/"} element={<TodolistsList demo={demo}/>}/>
-                        <Route path={"/login"} element={<Login/>}/>
-                    </Routes>
-                </Container>
-            </div>
+        <div className="App">
+            <ErrorSnackbar/>
+            <AppBar position="static">K
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        News
+                    </Typography>
+                    {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
+                </Toolbar>
+                {status === "loading" && <LinearProgress/>}
+            </AppBar>
+            <Container fixed>
+                <Routes>
+                    <Route path={"/"} element={<TodolistsList demo={demo}/>}/>
+                    <Route path={"/login"} element={<Login/>}/>
+                </Routes>
+            </Container>
+        </div>
     );
 }
 
