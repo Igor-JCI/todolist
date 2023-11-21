@@ -11,7 +11,7 @@ import {
     Typography
 } from "@mui/material";
 import {Menu} from "@mui/icons-material";
-import {TodolistsList} from "../features/TodolistsList/TodolistsList";
+import {TodolistsList} from "../features/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatchType} from "./store";

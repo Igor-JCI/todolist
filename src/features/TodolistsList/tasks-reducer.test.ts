@@ -1,7 +1,7 @@
 import {TaskStateType} from "../../trash/App";
 import {tasksReducer} from "./tasks-reducer";
 import {TaskPriorities, TaskStatuses} from "../../API/todolists-api";
-import {addTaskTC, fetchTasksTC, removeTaskTC, updateTaskTC} from "./task-actions";
+import {addTask, fetchTasks, removeTask, updateTask} from "./task-actions";
 import {addTodolistTC, fetchToDoListTC, removeToDoListTC} from "./todolist-actions";
 
 let startState: TaskStateType = {}
@@ -40,7 +40,7 @@ beforeEach(() => {
 
 test("correct task should be deleted from correct array", () => {
     const param = {taskId: "2", toDoListId: "toDoListId2"};
-    const action = removeTaskTC.fulfilled(param,"",param)
+    const action = removeTask.fulfilled(param,"",param)
     const endState = tasksReducer(startState, action)
 
     expect(endState["toDoListId1"].length).toBe(3)
@@ -63,7 +63,7 @@ test("correct task should be added from correct array", () => {
         title: "juce",
         todoListId: "toDoListId2"
     };
-    const action = addTaskTC.fulfilled(task, "", {title: task.title, toDoListId: task.todoListId})
+    const action = addTask.fulfilled(task, "", {title: task.title, toDoListId: task.todoListId})
     const endState = tasksReducer(startState, action)
 
     expect(endState["toDoListId1"].length).toBe(3)
@@ -80,7 +80,7 @@ test("status of specified task should be changed", () => {
         },
         toDoListId: "toDoListId2"
     };
-    const action = updateTaskTC.fulfilled(updateModel, "", updateModel)
+    const action = updateTask.fulfilled(updateModel, "", updateModel)
     const endState = tasksReducer(startState, action)
 
     expect(endState["toDoListId2"][1].status).toBe(TaskStatuses.New)
@@ -89,7 +89,7 @@ test("status of specified task should be changed", () => {
 })
 test("title of specified task should be changed", () => {
     let updateModel = {taskId: "2", model: {title: "way"}, toDoListId: "toDoListId2"};
-    const action = updateTaskTC.fulfilled(updateModel, "", updateModel)
+    const action = updateTask.fulfilled(updateModel, "", updateModel)
     const endState = tasksReducer(startState, action)
 
     expect(endState["toDoListId2"][1].title).toBe("way")
@@ -142,7 +142,7 @@ test("empty arrays should be added when we set todolist", () => {
 test("tasks should be added for todolist", () => {
     /*const action = setTasksAC({tasks: startState["toDoListId1"], todolistId: "toDoListId1"})*/
 
-    const action = fetchTasksTC.fulfilled({
+    const action = fetchTasks.fulfilled({
         tasks: startState["toDoListId1"],
         todolistId: "toDoListId1"
     }, "", "toDoListId1")
