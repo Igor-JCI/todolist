@@ -5,7 +5,7 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task/Task";
 import {TaskStatuses, TaskType} from "../../../API/todolists-api";
-import {TodolistsDomainType} from "../todolists-reducer";
+import {FilterValuesType, TodolistsDomainType} from "../todolists-reducer";
 import {useActions} from "../../../app/store";
 import {tasksActions, todolistsActions} from "../index";
 
@@ -86,7 +86,13 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
                 }
             </div>
             <div>
-                <Button color={"inherit"} variant={props.todolist.filter === "all" ? "contained" : "text"}
+                <FilterButton onClick={onAllClickHandler} selectedFilter = {props.todolist.filter}
+                              buttonFilter = "all" color = 'inherit' text = "All"/>
+                <FilterButton onClick={onAllClickHandler} selectedFilter = {props.todolist.filter}
+                              buttonFilter = "active" color = 'primary' text = "Active"/>
+                <FilterButton onClick={onAllClickHandler} selectedFilter = {props.todolist.filter}
+                              buttonFilter = "completed" color = 'secondary' text = "Completed"/>
+                {/*<Button color={"inherit"} variant={props.todolist.filter === "all" ? "contained" : "text"}
                         onClick={onAllClickHandler}>All
                 </Button>
                 <Button color={"primary"} variant={props.todolist.filter === "active" ? "contained" : "text"}
@@ -94,9 +100,22 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
                 </Button>
                 <Button color={"secondary"} variant={props.todolist.filter === "completed" ? "contained" : "text"}
                         onClick={onCompletedClickHandler}>Completed
-                </Button>
+                </Button>*/}
             </div>
         </div>
     )
 })
 
+type FilterButtonPropsType = {
+    onClick: () => void
+    selectedFilter: FilterValuesType,
+    buttonFilter: FilterValuesType,
+    color: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
+    text: string
+}
+
+const FilterButton: React.FC<FilterButtonPropsType> = ({onClick, selectedFilter, buttonFilter, color,text}) => {
+    return <Button color={color} variant={selectedFilter === buttonFilter ? "contained" : "text"}
+                   onClick={onClick}>{text}
+    </Button>
+}

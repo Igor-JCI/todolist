@@ -15,9 +15,9 @@ import {TodolistsList} from "../features/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatchType} from "./store";
-import {initializeAppTC} from "./app-reducer";
+import {asyncActions} from "./app-reducer";
 import {Route, Routes} from "react-router-dom";
-import {Login} from "../features/Auth/Login";
+import {Login} from "../features/Auth";
 import {logoutTC} from "../features/Auth/auth-reducer";
 import {appSelectors} from "./";
 import {authSelectors} from "../features/Auth";
@@ -35,7 +35,7 @@ function App({demo = false}: PropsType) {
 
     useEffect(() => {
         if (!demo) {
-            dispatch(initializeAppTC())
+            dispatch(asyncActions.initializeAppTC())
         }
     }, [])
 
