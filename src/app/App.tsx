@@ -53,7 +53,7 @@ function App({demo = false}: PropsType) {
     return (
         <div className="App">
             <ErrorSnackbar/>
-            <AppBar position="static">K
+            <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>

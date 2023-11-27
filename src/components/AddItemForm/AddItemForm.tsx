@@ -40,6 +40,6 @@ type AddItemFormPropsType = {
                    label="Type value" variant="outlined"
                    helperText={error}
         />
-        <IconButton disabled={disabled} size={"large"} onClick={addItemHandler} color={"primary"}> <ControlPoint/></IconButton>
+        <IconButton disabled={disabled} size={"large"} onClick={addItemHandler} color={"primary"} style = {{marginLeft: "5px"}}> <ControlPoint/></IconButton>
     </div>
 })
