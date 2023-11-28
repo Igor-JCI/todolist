@@ -6,13 +6,17 @@ import {Delete} from "@mui/icons-material";
 import {Task} from "./Task/Task";
 import {TaskStatuses, TaskType} from "../../../API/todolists-api";
 import {FilterValuesType, TodolistsDomainType} from "../todolists-reducer";
-import {useActions} from "../../../app/store";
+import {useActions, useAppDispatch} from "../../../app/store";
 import {tasksActions, todolistsActions} from "../index";
+import {authActions} from "../../Auth";
+import {loginTC} from "../../Auth/auth-reducer";
+import any = jasmine.any;
 
 
 export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
     const {changeTodolistFilter, removeToDoListTC, changeTodolistTitleTC} = useActions(todolistsActions)
-    const {addTask, fetchTasks} = useActions(tasksActions)
+    const {fetchTasks} = useActions(tasksActions)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (demo) {
@@ -27,8 +31,19 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
     const removeToDoList = () => {
         removeToDoListTC(props.todolist.id)
     }
-    const addTaskCallBack = useCallback((title: string) => {
-        addTask({title, toDoListId: props.todolist.id})
+    const addTaskCallBack = useCallback(async (title: string) => {
+        let thunk = tasksActions.addTask({title, toDoListId: props.todolist.id})
+
+        const resultAction = await dispatch(thunk)
+        if (tasksActions.addTask.rejected.match(resultAction)) {
+            if (resultAction.payload?.errors?.length) {
+                const errorMessage = resultAction.payload?.errors[0]
+                throw new Error(errorMessage)
+            } else {
+                throw new Error("Some error occured")
+            }
+        }
+
     }, [props.todolist.id])
     const changeTodolistTitle = useCallback((newTitle: string) => {
         changeTodolistTitleTC({toDoListId: props.todolist.id, newTitle})
@@ -76,7 +91,7 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
                         }
                     )
                 }
-                {!tasksForTodolist.length && <div style={{padding:"10px", color:"grey"}}>No task</div>}
+                {!tasksForTodolist.length && <div style={{padding: "10px", color: "grey"}}>No task</div>}
             </div>
             <div>
                 {renderFilterButton("all", 'inherit', "All")}

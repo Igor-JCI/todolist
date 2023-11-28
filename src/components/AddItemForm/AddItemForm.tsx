@@ -4,11 +4,10 @@ import {ControlPoint} from "@mui/icons-material";
 
 
 type AddItemFormPropsType = {
-    addItem: (title: string) => void,
+    addItem: (title: string) => Promise<any>,
     disabled?: boolean
 }
- export const AddItemForm = React.memo(({addItem, disabled = false  }: AddItemFormPropsType) => {
-    console.log("Form is called")
+export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormPropsType) => {
     let [title, setTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
@@ -23,10 +22,14 @@ type AddItemFormPropsType = {
             addItemHandler()
         }
     }
-    const addItemHandler = () => {
+    const addItemHandler = async () => {
         if (title.trim() !== "") {
-            addItem(title.trim())
-            setTitle("")
+            try {
+                await addItem(title.trim())
+                setTitle("")
+            } catch (error: any) {
+                setError(error.message)
+            }
         } else {
             setError("Title is required")
         }
@@ -40,6 +43,7 @@ type AddItemFormPropsType = {
                    label="Type value" variant="outlined"
                    helperText={error}
         />
-        <IconButton disabled={disabled} size={"large"} onClick={addItemHandler} color={"primary"} style = {{marginLeft: "5px"}}> <ControlPoint/></IconButton>
+        <IconButton disabled={disabled} size={"large"} onClick={addItemHandler} color={"primary"}
+                    style={{marginLeft: "5px"}}> <ControlPoint/></IconButton>
     </div>
 })

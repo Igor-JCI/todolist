@@ -8,13 +8,16 @@ export default {
   component: AddItemForm,
 }
 
-const callback = action("Button 'add' was pressed inside the form")
+const asyncCallBack = async (...params:any[]) => {
+  action("Button 'add' was pressed inside the form")(...params)
+}
+
 export const AddItemFormBaseExample = (props:any) => {
-  return<AddItemForm addItem={callback}/>
+  return<AddItemForm addItem={asyncCallBack}/>
 }
 
 export const AddItemFormDisabledExample = (props:any) => {
-  return<AddItemForm disabled = {true} addItem={callback}/>
+  return<AddItemForm disabled = {true} addItem={asyncCallBack}/>
 }
 
 /*
