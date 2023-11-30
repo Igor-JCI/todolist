@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from "react";
-import {AddItemForm} from "../../../components/AddItemForm/AddItemForm";
+import {AddItemForm, AddItemFormSubmitHelperType} from "../../../components/AddItemForm/AddItemForm";
 import {EditableSpan} from "../../../components/EditableSpan/EditableSpan";
 import {Button, IconButton, Paper} from "@mui/material";
 import {Delete} from "@mui/icons-material";
@@ -31,17 +31,19 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
     const removeToDoList = () => {
         removeToDoListTC(props.todolist.id)
     }
-    const addTaskCallBack = useCallback(async (title: string) => {
+    const addTaskCallBack = useCallback(async (title: string, helper: AddItemFormSubmitHelperType) => {
         let thunk = tasksActions.addTask({title, toDoListId: props.todolist.id})
 
         const resultAction = await dispatch(thunk)
         if (tasksActions.addTask.rejected.match(resultAction)) {
             if (resultAction.payload?.errors?.length) {
                 const errorMessage = resultAction.payload?.errors[0]
-                throw new Error(errorMessage)
+                helper.setError(errorMessage)
             } else {
-                throw new Error("Some error occured")
+                helper.setError("Some error occured")
             }
+        } else {
+            helper.setTitle("")
         }
 
     }, [props.todolist.id])
@@ -70,9 +72,10 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
         <Paper style={{padding: "10px", position: "relative"}}>
 
             <IconButton onClick={removeToDoList}
+                        size={"small"}
                         disabled={props.todolist.entityStatus === "loading"}
                         style={{position: "absolute", right: "0px", top: "0px"}}
-            ><Delete></Delete></IconButton>
+            ><Delete fontSize={"small"}/></IconButton>
 
             <h3>
                 <EditableSpan title={props.todolist.title} onChange={changeTodolistTitle}/>

@@ -2,9 +2,10 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {IconButton, TextField} from "@mui/material";
 import {ControlPoint} from "@mui/icons-material";
 
+export type AddItemFormSubmitHelperType = { setError: (error: string) => void, setTitle: (title: string) => void }
 
 type AddItemFormPropsType = {
-    addItem: (title: string) => Promise<any>,
+    addItem: (title: string, helper: AddItemFormSubmitHelperType) => void,
     disabled?: boolean
 }
 export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormPropsType) => {
@@ -24,12 +25,7 @@ export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormP
     }
     const addItemHandler = async () => {
         if (title.trim() !== "") {
-            try {
-                await addItem(title.trim())
-                setTitle("")
-            } catch (error: any) {
-                setError(error.message)
-            }
+            addItem(title, {setError, setTitle})
         } else {
             setError("Title is required")
         }
