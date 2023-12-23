@@ -3,8 +3,8 @@ import {Provider} from 'react-redux'
 import {applyMiddleware, combineReducers, createStore} from 'redux'
 import {v1} from 'uuid'
 import {AppRootState, RootReducerType} from '../app/store'
-import {tasksReducer} from '../features/TodolistsList/tasks-reducer'
-import {toDoListsReducer} from '../features/TodolistsList/todolists-reducer'
+import {tasksReducer} from '../features/TodolistsList/Todolist/Task/tasks-reducer'
+import {toDoListsReducer} from '../features/TodolistsList/Todolist/todolists-reducer'
 import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
 import {appReducer} from "../app/app-reducer";
 import thunkMiddleWare from "redux-thunk";

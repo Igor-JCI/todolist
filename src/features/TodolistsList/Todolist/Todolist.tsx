@@ -5,12 +5,10 @@ import {Button, IconButton, Paper} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task/Task";
 import {TaskStatuses, TaskType} from "../../../API/todolists-api";
-import {FilterValuesType, TodolistsDomainType} from "../todolists-reducer";
+import {FilterValuesType, TodolistsDomainType} from "./todolists-reducer";
 import {useActions, useAppDispatch} from "../../../app/store";
-import {tasksActions, todolistsActions} from "../index";
-import {authActions} from "../../Auth";
-import {loginTC} from "../../Auth/auth-reducer";
-import any = jasmine.any;
+import {tasksActions} from "./Task";
+import { todolistsActions} from "./todolists-reducer";
 
 
 export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
@@ -48,7 +46,7 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
 
     }, [props.todolist.id])
     const changeTodolistTitle = useCallback((newTitle: string) => {
-        changeTodolistTitleTC({toDoListId: props.todolist.id, newTitle})
+        changeTodolistTitleTC({id: props.todolist.id, title: newTitle})
     }, [props.todolist.id])
 
     let tasksForTodolist = props.tasks

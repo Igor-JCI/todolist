@@ -5,12 +5,12 @@ import {
     TaskStatuses,
     TaskType,
     toDoListsAPI
-} from "../../API/todolists-api";
+} from "../../../../API/todolists-api";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {setAppStatusAC} from "../../app/app-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
-import {AppRootState} from "../../app/store";
-import {asyncActions as asyncToDoListAction} from "./todolists-reducer"
+import {setAppStatusAC} from "../../../../app/app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../../../../utils/error-utils";
+import {AppRootState} from "../../../../app/store";
+import {todolistsActions} from "../todolists-reducer"
 
 export const removeTask = createAsyncThunk("tasks/removeTask", async (param: { taskId: string, toDoListId: string }, thunkAPI) => {
     await toDoListsAPI.deleteTask(param.toDoListId, param.taskId)
@@ -93,13 +93,13 @@ const slice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(asyncToDoListAction.addTodolistTC.fulfilled, (state, action) => {
+        builder.addCase(todolistsActions.addTodolistTC.fulfilled, (state, action) => {
             state[action.payload.todolist.id] = []
         });
-        builder.addCase(asyncToDoListAction.removeToDoListTC.fulfilled, (state, action) => {
+        builder.addCase(todolistsActions.removeToDoListTC.fulfilled, (state, action) => {
             delete state[action.payload.id]
         });
-        builder.addCase(asyncToDoListAction.fetchToDoListTC.fulfilled, (state, action) => {
+        builder.addCase(todolistsActions.fetchToDoListTC.fulfilled, (state, action) => {
             action.payload.todolists.forEach((tl: any) => {
                 state[tl.id] = []
             })

@@ -6,9 +6,10 @@ import {
     changeTodolistFilter,
     toDoListsReducer
 } from "./todolists-reducer";
-import {RequestStatusType} from "../../app/app-reducer";
-import {addTodolistTC, changeTodolistTitleTC, fetchToDoListTC, removeToDoListTC} from "./todolist-actions";
+import {RequestStatusType} from "../../../app/app-reducer";
+import {todolistsActions} from "./todolists-reducer";
 
+const {addTodolistTC, changeTodolistTitleTC, fetchToDoListTC, removeToDoListTC} = todolistsActions
 let toDoListId1: string
 let toDoListId2: string
 let startState: Array<TodolistsDomainType> = []

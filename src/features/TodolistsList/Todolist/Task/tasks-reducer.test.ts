@@ -1,6 +1,6 @@
 import {TaskStateType} from "../../trash/App";
 import {tasksReducer} from "./tasks-reducer";
-import {TaskPriorities, TaskStatuses} from "../../API/todolists-api";
+import {TaskPriorities, TaskStatuses} from "../../../../API/todolists-api";
 import {addTask, fetchTasks, removeTask, updateTask} from "./task-actions";
 import {addTodolistTC, fetchToDoListTC, removeToDoListTC} from "./todolist-actions";
 

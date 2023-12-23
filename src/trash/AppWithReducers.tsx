@@ -8,8 +8,8 @@ import {Menu} from "@mui/icons-material";
 import {
     changeTodolistFilter, FilterValuesType,
     toDoListsReducer
-} from "../features/TodolistsList/todolists-reducer";
-import { tasksReducer} from "../features/TodolistsList/tasks-reducer";
+} from "../features/TodolistsList/Todolist/todolists-reducer";
+import { tasksReducer} from "../features/TodolistsList/Todolist/Task/tasks-reducer";
 import {TaskPriorities, TaskStatuses} from "../API/todolists-api";
 
 

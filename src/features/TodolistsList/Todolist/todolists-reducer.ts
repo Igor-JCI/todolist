@@ -1,8 +1,8 @@
 import {v1} from "uuid";
-import {FieldErrorType, TaskType, toDoListsAPI, TodolistsType} from "../../API/todolists-api";
-import {RequestStatusType, setAppStatusAC} from "../../app/app-reducer";
+import {FieldErrorType, TaskType, toDoListsAPI, TodolistsType} from "../../../API/todolists-api";
+import {RequestStatusType, setAppStatusAC} from "../../../app/app-reducer";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "../../../utils/error-utils";
 
 export let toDoListId1 = v1()
 export let toDoListId2 = v1()
@@ -55,25 +55,19 @@ const addTodolistTC = createAsyncThunk <{todolist: TodolistsType}, string,
         return rejectWithValue({errors: [error.message], fieldsError: undefined})
     }
 })
-const changeTodolistTitleTC = createAsyncThunk("todolists/changeTodolistTitle", async (param: { toDoListId: string, newTitle: string }, {
+const changeTodolistTitleTC = createAsyncThunk("todolists/changeTodolistTitle", async (param: { id: string, title: string }, {
     dispatch,
     rejectWithValue
 }) => {
-    await toDoListsAPI.UpdateTodolistTitle(param.toDoListId, param.newTitle)
+    await toDoListsAPI.UpdateTodolistTitle(param.id, param.title)
     try {
-        return {id: param.toDoListId, title: param.newTitle}
+        return {id: param.id, title: param.title}
     } catch (error: any) {
         handleServerNetworkError(error, dispatch)
         return rejectWithValue(null)
     }
 })
 
-export const asyncActions = {
-    fetchToDoListTC,
-    removeToDoListTC,
-    addTodolistTC,
-    changeTodolistTitleTC
-}
 
 export const slice = createSlice({
     name: "toDoLists",
@@ -109,6 +103,14 @@ export const slice = createSlice({
 })
 export const toDoListsReducer = slice.reducer
 export const {changeTodolistFilter, changeTodolistEntityStatus} = slice.actions
+export const todolistsActions = {
+    fetchToDoListTC,
+    removeToDoListTC,
+    addTodolistTC,
+    changeTodolistTitleTC,
+    changeTodolistFilter,
+    changeTodolistEntityStatus
+}
 
 //types
 
