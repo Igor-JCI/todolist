@@ -3,6 +3,7 @@ import {FieldErrorType, TaskType, toDoListsAPI, TodolistsType} from "../../../AP
 import {RequestStatusType, setAppStatusAC} from "../../../app/app-reducer";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {handleServerAppError, handleServerNetworkError} from "../../../utils/error-utils";
+import {ThunkError} from "../../../app/store";
 
 export let toDoListId1 = v1()
 export let toDoListId2 = v1()
@@ -36,8 +37,7 @@ const removeToDoListTC = createAsyncThunk("todolists/removeToDoList", async (toD
         return rejectWithValue(null)
     }
 })
-const addTodolistTC = createAsyncThunk <{todolist: TodolistsType}, string,
-    { rejectValue: { errors: Array<string>, fieldsError?: Array<FieldErrorType>} }>("todolists/addTodolist", async (title, {dispatch,
+const addTodolistTC = createAsyncThunk <{todolist: TodolistsType}, string, ThunkError>("todolists/addTodolist", async (title, {dispatch,
     rejectWithValue
 }) => {
     dispatch(setAppStatusAC({status: "loading"}))

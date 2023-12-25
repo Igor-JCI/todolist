@@ -7,6 +7,7 @@ import {authReducer} from "../features/Auth/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {useDispatch} from "react-redux";
 import {useMemo} from "react";
+import {FieldErrorType} from "../API/todolists-api";
 
 const rootReducer = combineReducers({
     toDoLists: toDoListsReducer,
@@ -36,6 +37,9 @@ export function useActions<T extends ActionCreatorsMapObject<any>>(actions: T) {
     }, [])
     return boundActions
 }
+
+
+export type ThunkError = { rejectValue: { errors: Array<string>, fieldsError?: Array<FieldErrorType> } }
 
 // @ts-ignore
 window.store = store

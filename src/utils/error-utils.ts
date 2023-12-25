@@ -11,7 +11,16 @@ export const handleServerAppError = <D>(data: ResponseType<D>,
     dispatch(setAppStatusAC({status: "failed"}))
 }
 
-export const handleServerNetworkError = (error: { message: string },
+export const handleServerNetworkError = (error: any,
+                                         dispatch: Dispatch,
+                                         showError = true) => {
+    if (showError) {
+        dispatch(setAppErrorAC({error: error.message ? error.message : "Some error occurred"}))
+    }
+    dispatch(setAppStatusAC({status: "failed"}))
+}
+
+export const handleAsyncServerNetworkError = (error: any,
                                          dispatch: Dispatch,
                                          showError = true) => {
     if (showError) {

@@ -9,7 +9,7 @@ import {
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {setAppStatusAC} from "../../../../app/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "../../../../utils/error-utils";
-import {AppRootState} from "../../../../app/store";
+import {AppRootState, ThunkError} from "../../../../app/store";
 import {todolistsActions} from "../todolists-reducer"
 
 export const removeTask = createAsyncThunk("tasks/removeTask", async (param: { taskId: string, toDoListId: string }, thunkAPI) => {
@@ -23,24 +23,20 @@ export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (todolistId
     return {tasks: res.data.items, todolistId}
 })
 export const addTask = createAsyncThunk<TaskType,
-    { title: string, toDoListId: string },
-    { rejectValue: { errors: Array<string>, fieldsError?: Array<FieldErrorType> } }>("tasks/addTask", async (param, {
-    dispatch,
-    rejectWithValue
-}) => {
-    dispatch(setAppStatusAC({status: "loading"}))
+    { title: string, toDoListId: string }, ThunkError>("tasks/addTask", async (param, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatusAC({status: "loading"}))
     try {
         const res = await toDoListsAPI.createTask(param.toDoListId, param.title)
         if (res.data.resultCode === 0) {
-            dispatch(setAppStatusAC({status: "succeeded"}))
+            thunkAPI.dispatch(setAppStatusAC({status: "succeeded"}))
             return res.data.data.item
         } else {
-            handleServerAppError(res.data, dispatch, false)
-            return rejectWithValue({errors: res.data.messages, fieldsError: res.data.fieldsErrors})
+            handleServerAppError(res.data, thunkAPI.dispatch, false)
+            return thunkAPI.rejectWithValue({errors: res.data.messages, fieldsError: res.data.fieldsErrors})
         }
     } catch (error: any) {
-        handleServerNetworkError(error, dispatch, false)
-        return rejectWithValue({errors: [error.message], fieldsError: undefined})
+        handleServerNetworkError(error, thunkAPI.dispatch, false)
+        return thunkAPI.rejectWithValue({errors: [error.message], fieldsError: undefined})
     }
 
 
