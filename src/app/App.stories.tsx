@@ -3,7 +3,7 @@ import App from "./App";
 import {BrowserRouterDecorator, ReduxStoreProviderDecorator} from "../stories/ReduxStoreProviderDecorator";
 
 export default {
-    title: "App Stories",
+    title: "Application Stories",
     component: App,
     decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator]
 }
@@ -13,19 +13,19 @@ export const AppBaseExample = (props: any) => {
 }
 
 
-/*import App from "../App";
+/*import Application from "../Application";
 import {Provider} from "react-redux";
 import {store} from "./../state/store";
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 
 export default {
-  title: "App Component",
-  component: App,
+  title: "Application Component",
+  component: Application,
   decorators:[ReduxStoreProviderDecorator]
 }
 
 export const AppWithReduxBaseExample = (props:any) => {
-  return<Provider store={store}><App/></Provider>
+  return<Provider store={store}><Application/></Provider>
 
 }
 

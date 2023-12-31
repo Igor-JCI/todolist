@@ -1,18 +1,16 @@
-import {authAPI} from "../API/todolists-api";
-import {setIsLoggedInAC} from "../features/Auth/auth-reducer";
-import {AsyncThunkAction, createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {setIsLoggedIn} from "../Auth/auth-reducer";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {authAPI} from "../../API/auth-api";
 
- const initializeAppTC = createAsyncThunk("app/initializeApp", async (param, {dispatch}) => {
+const initializeApp = createAsyncThunk("application/initializeApp", async (param, {dispatch}) => {
     const res = await authAPI.me()
     if (res.data.resultCode === 0) {
-        dispatch(setIsLoggedInAC({value: true}))
+        dispatch(setIsLoggedIn({value: true}))
     } else {
     }
 })
 
-export const asyncActions = {
-    initializeAppTC
-}
+export const asyncActions = {initializeApp}
 
 const slice = createSlice({
     name: "app",
@@ -22,21 +20,22 @@ const slice = createSlice({
         isInitialized: false
     } as InitialStateType,
     reducers: {
-        setAppErrorAC(state, action: PayloadAction<{ error: string | null }>) {
+        setAppError(state, action: PayloadAction<{ error: string | null }>) {
             state.error = action.payload.error
         },
-        setAppStatusAC(state, action: PayloadAction<{ status: RequestStatusType }>) {
+        setAppStatus(state, action: PayloadAction<{ status: RequestStatusType }>) {
             state.status = action.payload.status
         }
     },
     extraReducers: builder => {
-        builder.addCase(initializeAppTC.fulfilled, (state) => {
+        builder.addCase(initializeApp.fulfilled, (state) => {
             state.isInitialized = true
         })
     }
 })
-export const appReducer = slice.reducer
-export const {setAppErrorAC, setAppStatusAC} = slice.actions
+
+export const applicationReducer = slice.reducer
+export const {setAppError, setAppStatus} = slice.actions
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {

@@ -6,7 +6,7 @@ import {
     changeTodolistFilter,
     toDoListsReducer
 } from "./todolists-reducer";
-import {RequestStatusType} from "../../../app/app-reducer";
+import {RequestStatusType} from "../../Application/application-reducer";
 import {todolistsActions} from "./todolists-reducer";
 
 const {addTodolistTC, changeTodolistTitleTC, fetchToDoListTC, removeToDoListTC} = todolistsActions

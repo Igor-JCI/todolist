@@ -14,13 +14,13 @@ import {Menu} from "@mui/icons-material";
 import {TodolistsList} from "../features/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatchType} from "./store";
-import {asyncActions} from "./app-reducer";
+import {AppDispatchType} from "./../utils/types";
+import {asyncActions} from "../features/Application/";
 import {Route, Routes} from "react-router-dom";
-import {Login} from "../features/Auth";
-import {logoutTC} from "../features/Auth/auth-reducer";
+import {authActions, Login} from "../features/Auth/";
 import {appSelectors} from "./";
 import {authSelectors} from "../features/Auth";
+import {useActions} from "../utils/redux-utils";
 
 type PropsType = {
     demo?: boolean
@@ -31,16 +31,17 @@ function App({demo = false}: PropsType) {
     const isInitialized = useSelector(appSelectors.selectIsInitialized)
     const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn)
 
-    const dispatch = useDispatch<AppDispatchType>()
+    const {logout} = useActions(authActions)
+    const {initializeApp} = useActions(asyncActions)
 
     useEffect(() => {
         if (!demo) {
-            dispatch(asyncActions.initializeAppTC())
+            initializeApp()
         }
     }, [])
 
     const logoutHandler = useCallback(() => {
-        dispatch(logoutTC())
+        logout()
     }, [])
 
     if (!isInitialized) {

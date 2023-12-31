@@ -4,11 +4,11 @@ import {EditableSpan} from "../../../components/EditableSpan/EditableSpan";
 import {Button, IconButton, Paper} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task/Task";
-import {TaskStatuses, TaskType} from "../../../API/todolists-api";
+import {TaskStatuses, TaskType} from "../../../API/types";
 import {FilterValuesType, TodolistsDomainType} from "./todolists-reducer";
-import {useActions, useAppDispatch} from "../../../app/store";
 import {tasksActions} from "./Task";
 import { todolistsActions} from "./todolists-reducer";
+import {useActions, useAppDispatch} from "../../../utils/redux-utils";
 
 
 export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
@@ -50,7 +50,6 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
     }, [props.todolist.id])
 
     let tasksForTodolist = props.tasks
-    console.log(props.todolist.filter)
     if (props.todolist.filter === "active") {
         tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.New)
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {action} from "@storybook/addon-actions";
 import {Task} from "../features/TodolistsList/Todolist/Task/Task";
-import {TaskStatuses} from "../API/todolists-api";
+import {TaskStatuses} from "../API/types";
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 
 export default {

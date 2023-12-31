@@ -1,4 +1,4 @@
-import {asyncAction as tasksAsyncActions} from "./tasks-reducer"
+import {asyncAction as tasksAsyncActions, tasksReducer} from "./tasks-reducer"
 
 const tasksActions = {
     ...tasksAsyncActions
@@ -6,4 +6,5 @@ const tasksActions = {
 
 export {
     tasksActions,
+    tasksReducer
 }

@@ -1,18 +1,15 @@
-import {ActionCreatorsMapObject, applyMiddleware, bindActionCreators, combineReducers, createStore} from "redux";
-import {toDoListsReducer} from "../features/TodolistsList/Todolist/todolists-reducer";
-import {tasksReducer} from "../features/TodolistsList/Todolist/Task/tasks-reducer";
+import {combineReducers} from "redux";
+import {toDoListsReducer} from "../features/TodolistsList/Todolist/";
+import {tasksReducer} from "../features/TodolistsList/Todolist/Task/";
 import thunkMiddleWare from "redux-thunk";
-import {appReducer} from "./app-reducer";
-import {authReducer} from "../features/Auth/auth-reducer";
+import {applicationReducer} from "../features/Application";
+import {authReducer} from "../features/Auth/";
 import {configureStore} from "@reduxjs/toolkit";
-import {useDispatch} from "react-redux";
-import {useMemo} from "react";
-import {FieldErrorType} from "../API/todolists-api";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     toDoLists: toDoListsReducer,
     tasks: tasksReducer,
-    app: appReducer,
+    app: applicationReducer,
     auth: authReducer,
 })
 
@@ -24,22 +21,7 @@ export const store = configureStore({
 
 })
 
-export type RootReducerType = typeof rootReducer
-export type AppRootState = ReturnType<RootReducerType>
 
-export type AppDispatchType = typeof store.dispatch
-export const useAppDispatch = () => useDispatch<AppDispatchType>()
-
-export function useActions<T extends ActionCreatorsMapObject<any>>(actions: T) {
-    const dispatch = useAppDispatch()
-    const boundActions = useMemo(() => {
-        return bindActionCreators(actions, dispatch)
-    }, [])
-    return boundActions
-}
-
-
-export type ThunkError = { rejectValue: { errors: Array<string>, fieldsError?: Array<FieldErrorType> } }
 
 // @ts-ignore
 window.store = store

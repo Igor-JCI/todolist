@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from "react";
 import {useSelector} from "react-redux";
-import {AppRootState, useActions, useAppDispatch} from "../../app/store";
+import {AppRootState} from "../../utils/types";
 import {TodolistsDomainType} from "./Todolist/todolists-reducer";
 import {TaskStateType} from "./Todolist/Task/tasks-reducer";
 import {Grid, Paper} from "@mui/material";
@@ -9,6 +9,7 @@ import {Todolist} from "./Todolist/Todolist";
 import {Navigate} from "react-router-dom";
 import {selectIsLoggedIn} from "../Auth/selectors";
 import {tasksActions, todolistsActions} from "./index";
+import {useActions, useAppDispatch} from "../../utils/redux-utils";
 
 type PropsType = {
     demo?: boolean
