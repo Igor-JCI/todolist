@@ -2,7 +2,7 @@ import {FieldErrorType, LoginParamsType} from "../../API/types";
 import {handleAsyncServerAppError, handleAsyncServerNetworkError} from "../../utils/error-utils";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {authAPI} from "../../API/auth-api";
-import { setAppStatus } from "../Application";
+import { setAppStatus } from "../CommonActions/ApplicationsCommonActions";
 
 //thunks
 export const login = createAsyncThunk<undefined, LoginParamsType, { rejectValue: { errors: Array<string>, fieldsError?: Array<FieldErrorType> } }>("auth/login", async (param, thunkAPI) => {

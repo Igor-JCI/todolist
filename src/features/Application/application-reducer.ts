@@ -1,6 +1,7 @@
 import {setIsLoggedIn} from "../Auth/auth-reducer";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {authAPI} from "../../API/auth-api";
+import {setAppError, setAppStatus} from "../CommonActions/ApplicationsCommonActions";
 
 const initializeApp = createAsyncThunk("application/initializeApp", async (param, {dispatch}) => {
     const res = await authAPI.me()
@@ -19,23 +20,22 @@ const slice = createSlice({
         error: null,
         isInitialized: false
     } as InitialStateType,
-    reducers: {
-        setAppError(state, action: PayloadAction<{ error: string | null }>) {
-            state.error = action.payload.error
-        },
-        setAppStatus(state, action: PayloadAction<{ status: RequestStatusType }>) {
-            state.status = action.payload.status
-        }
-    },
+    reducers: {},
     extraReducers: builder => {
-        builder.addCase(initializeApp.fulfilled, (state) => {
-            state.isInitialized = true
-        })
+        builder
+            .addCase(initializeApp.fulfilled, (state) => {
+                state.isInitialized = true
+            })
+            .addCase(setAppStatus, (state, action) => {
+                state.status = action.payload.status
+            })
+            .addCase(setAppError, (state, action) => {
+                state.error = action.payload.error
+            })
     }
 })
 
 export const applicationReducer = slice.reducer
-export const {setAppError, setAppStatus} = slice.actions
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {

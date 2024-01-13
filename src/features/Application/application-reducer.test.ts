@@ -1,4 +1,5 @@
-import {applicationReducer, InitialStateType, setAppError, setAppStatus} from "./application-reducer";
+import {applicationReducer, InitialStateType} from "./application-reducer";
+import {setAppError, setAppStatus} from "./../CommonActions/ApplicationsCommonActions";
 
 let startState: InitialStateType
 beforeEach(() => {

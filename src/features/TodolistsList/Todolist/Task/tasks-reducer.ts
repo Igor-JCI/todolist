@@ -1,7 +1,7 @@
 import {taskDataType, TaskPriorities, TaskStatuses, TaskType} from "../../../../API/types";
 import {toDoListsAPI} from "../../../../API/todolists-api";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {setAppStatus} from "../../../Application";
+import {setAppStatus} from "../../../CommonActions/ApplicationsCommonActions";
 import {handleAsyncServerAppError, handleAsyncServerNetworkError,} from "../../../../utils/error-utils";
 import {AppRootState, ThunkError} from "../../../../utils/types";
 import {todolistsActions} from "../todolists-reducer"
@@ -10,12 +10,17 @@ export const removeTask = createAsyncThunk("tasks/removeTask", async (param: { t
     await toDoListsAPI.deleteTask(param.toDoListId, param.taskId)
     return ({taskId: param.taskId, toDoListId: param.toDoListId})
 })
-export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (todolistId:string, thunkAPI) => {
+export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (todolistId: string, thunkAPI) => {
     thunkAPI.dispatch(setAppStatus({status: "loading"}))
+    try {
         const res = await toDoListsAPI.getTasks(todolistId)
         const tasks = res.data.items
         thunkAPI.dispatch(setAppStatus({status: "succeeded"}))
         return {tasks, todolistId}
+    } catch (error:any) {
+        return handleAsyncServerNetworkError(error, thunkAPI)
+    }
+
 
 })
 export const addTask = createAsyncThunk<TaskType,

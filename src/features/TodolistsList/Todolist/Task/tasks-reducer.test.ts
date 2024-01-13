@@ -1,8 +1,10 @@
-import {TaskStateType} from "../../trash/Application";
-import {tasksReducer} from "./tasks-reducer";
-import {TaskPriorities, TaskStatuses} from "../../../../API/todolists-api";
-import {addTask, fetchTasks, removeTask, updateTask} from "./task-actions";
-import {addTodolistTC, fetchToDoListTC, removeToDoListTC} from "./todolist-actions";
+import {tasksReducer, TaskStateType} from "./tasks-reducer";
+import {TaskPriorities, TaskStatuses} from "../../../../API/types";
+import {tasksActions} from "./index";
+import {todolistsActions} from "./../index";
+
+const {addTask, fetchTasks, removeTask, updateTask} = tasksActions
+const {addTodolistTC, fetchToDoListTC, removeToDoListTC} = todolistsActions
 
 let startState: TaskStateType = {}
 beforeEach(() => {
@@ -131,7 +133,7 @@ test("empty arrays should be added when we set todolist", () => {
             {id: "2", title: "title 2", addedDate: "", order: 0}
         ]
     };
-    const action = fetchToDoListTC.fulfilled(payload, "")
+    const action = fetchToDoListTC.fulfilled(payload, "",undefined)
     const endState = tasksReducer({}, action)
     const keys = Object.keys(endState)
 

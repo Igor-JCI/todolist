@@ -1,4 +1,4 @@
-import {setAppError, setAppStatus} from "../features/Application/";
+import {setAppError, setAppStatus} from "../features/CommonActions/ApplicationsCommonActions";
 import {ResponseType} from "../API/types";
 
 type ThunkAPIType = {
