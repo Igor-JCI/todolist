@@ -9,6 +9,6 @@ export function useActions<T extends ActionCreatorsMapObject<any>>(actions: T) {
     const dispatch = useAppDispatch()
     const boundActions = useMemo(() => {
         return bindActionCreators(actions, dispatch)
-    }, [])
+    }, [actions, dispatch])
     return boundActions
 }

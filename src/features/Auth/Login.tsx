@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 import {login} from "./auth-reducer";
 import {Navigate} from "react-router-dom";
 import {authActions, authSelectors} from "./";
-import {useActions, useAppDispatch} from "../../utils/redux-utils";
+import {useAppDispatch} from "../../utils/redux-utils";
 
 export const Login = () => {
     const dispatch = useAppDispatch()
@@ -66,7 +66,9 @@ export const Login = () => {
                     <FormLabel>
                         <p>To log in get registered
                             <a href={'https://social-network.samuraijs.com/'}
-                               target={'_blank'}> here
+                               target={'_blank'}
+                               rel="noopener noreferrer"
+                            > here
                             </a>
                         </p>
                         <p>or use common test account credentials:</p>

@@ -1,5 +1,5 @@
 import {setIsLoggedIn} from "../Auth/auth-reducer";
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {authAPI} from "../../API/auth-api";
 import {setAppError, setAppStatus} from "../CommonActions/ApplicationsCommonActions";
 
@@ -36,6 +36,7 @@ const slice = createSlice({
 })
 
 export const applicationReducer = slice.reducer
+
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {

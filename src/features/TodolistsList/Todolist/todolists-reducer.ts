@@ -26,7 +26,7 @@ const fetchToDoListTC = createAsyncThunk<{ todolists: TodolistsType[] }, undefin
 const removeToDoListTC = createAsyncThunk<{ id: string }, string, ThunkError>("todolists/removeToDoList", async (toDoListId, thunkAPI) => {
     thunkAPI.dispatch(setAppStatus({status: "loading"}))
     thunkAPI.dispatch(changeTodolistEntityStatus({id: toDoListId, status: "loading"}))
-    const res = await toDoListsAPI.deleteTodolist(toDoListId)
+    await toDoListsAPI.deleteTodolist(toDoListId)
     try {
         thunkAPI.dispatch(setAppStatus({status: "succeeded"}))
         return {id: toDoListId}

@@ -13,8 +13,7 @@ import {
 import {Menu} from "@mui/icons-material";
 import {TodolistsList} from "../features/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatchType} from "./../utils/types";
+import {useSelector} from "react-redux";
 import {asyncActions} from "../features/Application/";
 import {Route, Routes} from "react-router-dom";
 import {authActions, Login} from "../features/Auth/";
@@ -38,11 +37,11 @@ function App({demo = false}: PropsType) {
         if (!demo) {
             initializeApp()
         }
-    }, [])
+    }, [demo, initializeApp])
 
     const logoutHandler = useCallback(() => {
         logout()
-    }, [])
+    }, [logout])
 
     if (!isInitialized) {
         return <div style={{position: "fixed", top: "30%", textAlign: "center", width: "100%"}}>

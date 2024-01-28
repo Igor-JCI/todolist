@@ -21,11 +21,11 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
             return
         }
         fetchTasks(props.todolist.id)
-    }, [])
+    }, [demo, fetchTasks, props.todolist.id])
 
     const onFilterButtonClickHandler = useCallback((filter: FilterValuesType) => {
         changeTodolistFilter({id: props.todolist.id, filter})
-    }, [props.todolist.id])
+    }, [props.todolist.id, changeTodolistFilter])
     const removeToDoList = () => {
         removeToDoListTC(props.todolist.id)
     }
@@ -44,10 +44,10 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
             helper.setTitle("")
         }
 
-    }, [props.todolist.id])
+    }, [props.todolist.id, dispatch])
     const changeTodolistTitle = useCallback((newTitle: string) => {
         changeTodolistTitleTC({id: props.todolist.id, title: newTitle})
-    }, [props.todolist.id])
+    }, [props.todolist.id, changeTodolistTitleTC])
 
     let tasksForTodolist = props.tasks
     if (props.todolist.filter === "active") {

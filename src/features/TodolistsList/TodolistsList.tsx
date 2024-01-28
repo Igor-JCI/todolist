@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {AppRootState} from "../../utils/types";
 import {TodolistsDomainType} from "./Todolist/todolists-reducer";
 import {TaskStateType} from "./Todolist/Task/tasks-reducer";
-import {Grid, Paper} from "@mui/material";
+import {Grid} from "@mui/material";
 import {AddItemForm, AddItemFormSubmitHelperType} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 import {Navigate} from "react-router-dom";
@@ -35,14 +35,14 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         } else {
             helper.setTitle("")
         }
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         if (demo || !isLoggedIn) {
             return
         }
         fetchToDoListTC()
-    }, [])
+    }, [demo, fetchToDoListTC, isLoggedIn])
 
     if (!isLoggedIn) {
         return <Navigate to={"/login"}/>
