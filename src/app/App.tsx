@@ -67,7 +67,7 @@ function App({demo = false}: PropsType) {
             </AppBar>
             <Container fixed>
                 <Routes>
-                    <Route path={"/"} element={<TodolistsList demo={demo}/>}/>
+                    <Route path={"/todolist"} element={<TodolistsList demo={demo}/>}/>
                     <Route path={"/login"} element={<Login/>}/>
                 </Routes>
             </Container>

@@ -38,7 +38,7 @@
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "tes1t": "yarn jest:integration",
-    "storybook": "start-storybook -p 9009",
+    "sb": "start-storybook -p 9009",
     "build-storybook": "build-storybook -s public",
     "jest:integration": "jest -c integration/jest.config.js",
     "test:integration": "start-server-and-test storybook http-get://localhost:9009 jest:integration",
@@ -89,6 +89,7 @@
     "jest-image-snapshot": "^6.1.0",
     "jest-puppeteer": "^7.0.1",
     "puppeteer": "^19.7.1",
-    "start-server-and-test": "^1.15.4"
+    "start-server-and-test": "^1.15.4",
+    "storybook": "^7.6.10"
   }
 }
