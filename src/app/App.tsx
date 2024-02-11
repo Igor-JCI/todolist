@@ -15,7 +15,7 @@ import {TodolistsList} from "../features/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackBar/ErrorSnackbar";
 import {useSelector} from "react-redux";
 import {asyncActions} from "../features/Application/";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {authActions, Login} from "../features/Auth/";
 import {appSelectors} from "./";
 import {authSelectors} from "../features/Auth";
@@ -69,6 +69,7 @@ function App({demo = false}: PropsType) {
                 <Routes>
                     <Route path={"/"} element={<TodolistsList demo={demo}/>}/>
                     <Route path={"/login"} element={<Login/>}/>
+                    <Route path={"/todolist"} element={<Navigate to={'/'} />}/>
                 </Routes>
             </Container>
         </div>
