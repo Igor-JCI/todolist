@@ -32,7 +32,7 @@ function App({demo = false}: PropsType) {
 
     const {logout} = useActions(authActions)
     const {initializeApp} = useActions(asyncActions)
-
+    console.log(1212)
     useEffect(() => {
         if (!demo) {
             initializeApp()
