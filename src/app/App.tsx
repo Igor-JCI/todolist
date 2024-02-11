@@ -69,7 +69,7 @@ function App({demo = false}: PropsType) {
                 <Routes>
                     <Route path={"/"} element={<TodolistsList demo={demo}/>}/>
                     <Route path={"/login"} element={<Login/>}/>
-                    <Route path={"/todolist"} element={<Navigate to={'/'} />}/>
+                    <Route path={"/todolist"} element={<TodolistsList demo={demo}/>}/>
                 </Routes>
             </Container>
         </div>
