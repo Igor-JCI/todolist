@@ -72,8 +72,8 @@ export const Login = () => {
                             </a>
                         </p>
                         <p>or use common test account credentials:</p>
-                        <p>Email: free@samuraijs.com</p>
-                        <p>Password: free</p>
+                        <p>Email: 7.jciab.7@gmail.com</p>
+                        <p>Password: 111</p>
                     </FormLabel>
                     <FormGroup>
                         <TextField label="Email" margin="normal"

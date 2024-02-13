@@ -30,7 +30,11 @@ export const logout = createAsyncThunk("auth/logout", async (param, thunkAPI) =>
             return handleAsyncServerAppError(res.data, thunkAPI)
         }
     } catch (error: any) {
+        debugger
         return handleAsyncServerNetworkError(error, thunkAPI)
+    }
+    finally {
+        thunkAPI.dispatch(setAppStatus({status: "succeeded"}))
     }
 })
 
